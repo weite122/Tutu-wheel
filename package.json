@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/weite122/Tutu-wheel/issues"
   },
-  "homepage": "https://github.com/weite122/Tutu-wheel#readme"
+  "homepage": "https://github.com/weite122/Tutu-wheel#readme",
+  "dependencies": {
+    "vue": "^2.6.4"
+  }
 }
