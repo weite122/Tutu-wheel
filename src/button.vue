@@ -9,18 +9,22 @@
 </template>
 
 <script>
+  import Icon from './icon'
   export default {
+    components: {
+      'g-icon': Icon
+    },
     props: {
       icon: {},
-      loading:{
+      loading: {
         type: Boolean,
         default: false
       },
       iconPosition: {
         type: String,
         default: 'left',
-        validator (value) {
-          return value === 'left'|| value === 'right'
+        validator(value) {
+          return value === 'left' || value === 'right'
         }
       }
     }
@@ -29,9 +33,14 @@
 
 <style lang="scss">
     @keyframes spin {
-        0% {transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
     }
+
     .g-button {
         font-size: var(--font-size);
         height: var(--button-height);
@@ -43,32 +52,40 @@
         justify-content: center;
         align-items: center;
         vertical-align: middle;
+
         > .icon {
             order: 1;
             margin-right: .3em;
         }
+
         > .content {
             order: 2;
         }
+
         &.icon-right {
             > .icon {
                 order: 2;
                 margin-right: 0;
                 margin-left: .3em;
             }
+
             > .content {
                 order: 1;
             }
         }
+
         &:hover {
             border-color: var(--border-color-hover);
         }
+
         &:active {
             background-color: var(--button-active-bg);
         }
+
         &:focus {
             outline: none;
         }
+
         .loading {
             animation: spin 1s infinite linear;
         }
