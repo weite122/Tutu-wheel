@@ -1,0 +1,31 @@
+<template>
+    <div :class="[`col-${span}`]" class="col">
+        <slot></slot>
+    </div>
+</template>
+
+<script>
+  export default {
+    name: "WheelCol",
+    props: {
+      span: {
+        type: [Number, String]
+      }
+    }
+  }
+</script>
+
+<style lang="scss" scoped>
+    .col {
+        height: 100px;
+        background: grey;
+        width: 50%;
+        border: 1px solid red;
+        $class-prefix: col-;
+        @for $n from 1 through 24 {
+            &.#{$class-prefix}#{$n} {
+                width: ($n / 24) * 100%;
+            }
+        }
+    }
+</style>
