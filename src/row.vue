@@ -42,14 +42,14 @@
 <style lang="scss" scoped>
     .row {
         display: flex;
-    }
-    &.align-left {
-        justify-content: flex-start;
-    }
-    &.align-right {
-        justify-content: flex-end;
-    }
-    &.align-center {
-        justify-content: center;
+        &.align-left {
+            justify-content: flex-start;
+        }
+        &.align-right {
+            justify-content: flex-end;
+        }
+        &.align-center {
+            justify-content: center;
+        }
     }
 </style>
