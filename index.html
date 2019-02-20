@@ -32,74 +32,36 @@
             margin: 20px;
         }
     </style>
-
+    <style>
+        .demo {
+            background: #ddd;
+            border: 1px solid #666;
+            height: 100px;
+        }
+    </style>
 </head>
 <body>
 <div id="app">
-    <div style="border: 1px solid black">
-        <g-row gutter="20">
-            <g-col :ipad="{span:8}"
-                   span="{span:24}"
-                   :narrow-pc="{span:4}"
-                   :pc="{span:2}"
-                   :wide-pc="{span:1}"
-            >
-                1
-            </g-col>
-            <g-col :ipad="{span:16}"
-                   span="{span:24}"
-                   :narrow-pc="{span:20}"
-                   :pc="{span:22}"
-                   :wide-pc="{span:23}"
-            >11
-        </g-row>
-        <g-row gutter="20">
-            <g-col>3</g-col>
-            <g-col>3</g-col>
-            <g-col>3</g-col>
-        </g-row>
-        <g-row gutter="20">
-            <g-col>4</g-col>
-            <g-col>4</g-col>
-            <g-col>4</g-col>
-            <g-col>4</g-col>
-        </g-row>
-        <g-row gutter="20">
-            <g-col span="2">2</g-col>
-            <g-col offset="2" span="20">20</g-col>
-        </g-row>
-        <g-row gutter="20">
-            <g-col span="4">4</g-col>
-            <g-col span="20">20</g-col>
-        </g-row>
-    </div>
-
-    <div class="box">
-        <g-input disabled value="张三"></g-input>
-        <g-input readonly value="李四"></g-input>
-        <g-input value="王五"></g-input>
-    </div>
-    <div class="box">
-        <g-input v-model="message"></g-input>
-        <p>{{message}}</p>
-        <button @click="message += 1">加1</button>
-    </div>
-    <div class="box">
-        <g-button :loading="loading1" @click="loading1 = !loading1">
-            按钮
-        </g-button>
-        <g-button :loading="loading2" @click="loading2 = !loading2" icon="settings">
-            按钮
-        </g-button>
-        <g-button :loading="loading3" @click="loading3 = !loading3" icon="settings" icon-position="right">
-            按钮
-        </g-button>
-        <g-button-group>
-            <g-button icon="left">上一页</g-button>
-            <g-button>更多</g-button>
-            <g-button icon="right" icon-position="right">下一页</g-button>
-        </g-button-group>
-    </div>
+    <g-row>
+        <g-col :ipad="{span: 12}" :narrow-pc="{span:8}" span="24">
+            <div class="demo" ></div>
+        </g-col>
+        <g-col :ipad="{span: 12}" :narrow-pc="{span:8}" span="24">
+            <div class="demo" ></div>
+        </g-col>
+        <g-col :ipad="{span: 12}" :narrow-pc="{span:8}" span="24">
+            <div class="demo" ></div>
+        </g-col>
+        <g-col :ipad="{span: 12}" :narrow-pc="{span:8}" span="24">
+            <div class="demo" ></div>
+        </g-col>
+        <g-col :ipad="{span: 12}" :narrow-pc="{span:8}" span="24">
+            <div class="demo" ></div>
+        </g-col>
+        <g-col :ipad="{span: 12}" :narrow-pc="{span:8}" span="24">
+            <div class="demo" ></div>
+        </g-col>
+    </g-row>
 </div>
 <script src="./src/app.js"></script>
 </body>
