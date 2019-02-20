@@ -12,6 +12,7 @@
             padding: 0;
             box-sizing: border-box;
         }
+
         html {
             --button-height: 32px;
             --font-size: 14px;
@@ -22,9 +23,11 @@
             --border-color: #999;
             --border-color-hover: #666;
         }
+
         #app {
             margin: 20px;
         }
+
         .box {
             margin: 20px;
         }
@@ -36,20 +39,19 @@
     <div style="border: 1px solid black">
         <g-row gutter="20">
             <g-col :ipad="{span:8}"
+                   :phone="{span:24}"
                    :narrow-pc="{span:4}"
                    :pc="{span:2}"
-                   :phone="{span:24}"
                    :wide-pc="{span:1}"
-                   span="2"
             >
                 1
             </g-col>
             <g-col :ipad="{span:16}"
+                   :phone="{span:24}"
                    :narrow-pc="{span:20}"
                    :pc="{span:22}"
-                   :phone="{span:24}"
+
                    :wide-pc="{span:23}"
-                   span="22"
             >11
         </g-row>
         <g-row gutter="20">
@@ -76,7 +78,7 @@
     <div class="box">
         <g-input disabled value="张三"></g-input>
         <g-input readonly value="李四"></g-input>
-        <g-input value="王五" ></g-input>
+        <g-input value="王五"></g-input>
     </div>
     <div class="box">
         <g-input v-model="message"></g-input>
