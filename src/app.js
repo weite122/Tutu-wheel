@@ -22,8 +22,5 @@ new Vue({
     message: 'hello'
   },
   methods:{
-    // inputChange(e) {
-    //   console.log(e.target.value)
-    // }
   }
 })
