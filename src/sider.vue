@@ -1,17 +1,15 @@
 <template>
-    <div class="content">
+    <div class="sider">
         <slot></slot>
     </div>
 </template>
 
 <script>
   export default {
-    name: "WheelContent"
+    name: "WheelSider"
   }
 </script>
 
 <style lang="scss" scoped>
-    .content {
-        flex-grow: 1
-    }
+
 </style>
