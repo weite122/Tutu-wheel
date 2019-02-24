@@ -38,11 +38,18 @@ new Vue({
     message: 'hello'
   },
   created() {
-
+    this.$toast('我是 message', {
+      closeButton: {
+        text: '知道了',
+        callback () {
+          console.log('用户说他知道了')
+        }
+      }
+    })
   },
   methods:{
     showToast() {
-      this.$toast('我是 message')
+
     }
   }
 })
