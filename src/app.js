@@ -32,20 +32,10 @@ Vue.use(plugin)
 new Vue({
   el: "#app",
   data: {
-    loading1: false,
-    loading2: true,
-    loading3: false,
     message: 'hello'
   },
   created() {
-    this.$toast('我是 message', {
-      closeButton: {
-        text: '知道了',
-        callback () {
-          console.log('用户说他知道了')
-        }
-      }
-    })
+    this.$toast('文字文字文字', { enableHtml: true })
   },
   methods:{
     showToast() {
