@@ -64,11 +64,6 @@
         }
       },
       updateStyles() {
-        //karma测试所需
-        // setTimeout(()=>{
-        //   this.$refs.line.style.height =
-        //     `${this.$refs.toast.getBoundingClientRect().height}px`
-        // },500)
         this.$nextTick(() => {
           this.$refs.line.style.height =
             `${this.$refs.toast.getBoundingClientRect().height}px`
