@@ -47,6 +47,11 @@
     .tabs-item {
         padding: 0 2em;
         flex-shrink: 0;
+        cursor: pointer;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        border: 1px solid rebeccapurple;
         &.active {
             background: #666666;
         }
