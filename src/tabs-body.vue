@@ -6,7 +6,11 @@
 
 <script>
   export default {
-    name: "WheelTabsBody"
+    name: "WheelTabsBody",
+    inject: ['eventBus'],
+    created() {
+
+    }
   }
 </script>
 

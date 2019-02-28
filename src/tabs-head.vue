@@ -7,7 +7,10 @@
 
 <script>
   export default {
-    name: "WheelTabsHead"
+    name: "WheelTabsHead",
+    inject: ['eventBus'],
+    created() {
+    }
   }
 </script>
 

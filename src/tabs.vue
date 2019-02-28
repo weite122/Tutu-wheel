@@ -5,6 +5,7 @@
 </template>
 
 <script>
+  import Vue from 'vue'
   export default {
     name: "WheelTabs",
     props: {
@@ -20,8 +21,18 @@
         }
       }
     },
+    data () {
+      return {
+        eventBus: new Vue()
+      }
+    },
+    provide() {
+      return {
+        eventBus: this.eventBus
+      }
+    },
     created() {
-      // this.$emit('')
+
     }
   }
 </script>

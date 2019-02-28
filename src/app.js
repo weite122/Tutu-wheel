@@ -42,7 +42,7 @@ Vue.use(plugin)
 new Vue({
   el: "#app",
   data: {
-    message: 'hello'
+    selectedTab: 'sports'
   },
   created() {
 
