@@ -30,9 +30,30 @@ describe('Popover', () => {
       expect(contentWrapper.classList.contains('position-bottom')).to.be.true
       done()
     })
-    // const useElements = vm.$el.querySelectorAll('use')
-    // expect(useElements.length).to.equal(1)
-    // expect(useElements[0].getAttribute('xlink:href')).to.equal('#i-loading')
-    // vm.$destroy()
+  it('可以设置trigger.', (done) => {
+    Vue.component('g-popover', Popover)
+    const div = document.createElement('div')
+    document.body.appendChild(div)
+    div.innerHTML = `
+    <g-popover trigger="hover" ref="a">
+      <template slot="content">
+          <div>popover 内容</div>
+      </template>
+      <button>点我</button>
+    </g-popover>
+    `
+    const vm = new Vue({
+      el: div
+    })
+    setTimeout(() => {
+      let event = new Event('mouseenter');
+      vm.$el.dispatchEvent(event)
+      vm.$nextTick(() => {
+        const {contentWrapper} = vm.$refs.a.$refs
+        expect(contentWrapper).to.exist
+        done()
+      })
+    }, 200)
+
   })
 })
