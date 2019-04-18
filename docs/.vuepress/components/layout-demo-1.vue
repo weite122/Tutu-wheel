@@ -6,13 +6,13 @@
         </p>
 
         <g-layout style="color: white; margin-bottom:50px;">
-            <g-header style="height: 50px; background:lightskyblue;">
+            <g-header style="height: 50px; background: #3eaf7c;">
                 header
             </g-header>
-            <g-content style="height: 100px; background:deepskyblue;">
+            <g-content style="height: 100px; background:#2a8a5e;">
                 content
             </g-content>
-            <g-footer style="height: 50px; background:lightskyblue;">
+            <g-footer style="height: 50px; background:#3eaf7c;">
                 footer
             </g-footer>
         </g-layout>
@@ -39,17 +39,17 @@
     data () {
       return {
         content: `
-          <g-layout style="color: white; margin-bottom:50px;">
-            <g-header style="height: 50px; background:lightskyblue;">
-              header
+        <g-layout style="color: white; margin-bottom:50px;">
+            <g-header style="height: 50px; background: #3eaf7c;">
+                header
             </g-header>
-            <g-content style="height: 100px; background:deepskyblue;">
-              content
+            <g-content style="height: 100px; background:#2a8a5e;">
+                content
             </g-content>
-            <g-footer style="height: 50px; background:lightskyblue;">
-              footer
+            <g-footer style="height: 50px; background:#3eaf7c;">
+                footer
             </g-footer>
-          </g-layout>
+        </g-layout>
       `.replace(/^ {8}/gm, '').trim()
       }
     }

@@ -10,13 +10,13 @@
                 sider
             </g-sider>
             <g-layout>
-                <g-header style="height: 50px; background:lightskyblue;">
+                <g-header style="height: 50px; background: #3eaf7c;">
                     header
                 </g-header>
-                <g-content style="height: 100px; background:deepskyblue;">
+                <g-content style="height: 100px; background:#2a8a5e;">
                     content
                 </g-content>
-                <g-footer style="height: 50px; background:lightskyblue;">
+                <g-footer style="height: 50px; background:#3eaf7c;">
                     footer
                 </g-footer>
             </g-layout>
@@ -43,22 +43,22 @@
     data () {
       return {
         content: `
-          <g-layout style="color: white; overflow:hidden; margin-bottom:50px;">
+        <g-layout style="color: white; overflow:hidden; margin-bottom:50px;">
             <g-sider style=" background:#ddd; width:200px; color: black;">
-              sider
+                sider
             </g-sider>
             <g-layout>
-              <g-header style="height: 50px; background:lightskyblue;">
-                header
-              </g-header>
-              <g-content style="height: 100px; background:deepskyblue;">
-                content
-              </g-content>
-              <g-footer style="height: 50px; background:lightskyblue;">
-                footer
-              </g-footer>
+                <g-header style="height: 50px; background: #3eaf7c;">
+                    header
+                </g-header>
+                <g-content style="height: 100px; background:#2a8a5e;">
+                    content
+                </g-content>
+                <g-footer style="height: 50px; background:#3eaf7c;">
+                    footer
+                </g-footer>
             </g-layout>
-          </g-layout>
+        </g-layout>
       `.replace(/^ {8}/gm, '').trim()
       }
     }
