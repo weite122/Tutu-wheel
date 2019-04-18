@@ -50,7 +50,7 @@
 </script>
 
 <style lang="scss" scoped>
-    $blue: #409EFF;
+    $green: #3eaf7c;
     $disabled-text-color: grey;
     .tabs-item {
         padding: 0 2em;
@@ -61,7 +61,7 @@
         align-items: center;
         &.active {
             background: #fff;
-            color: $blue;
+            color: $green;
             font-weight: bold;
         }
         &.disabled{
@@ -70,3 +70,4 @@
         }
     }
 </style>
+
