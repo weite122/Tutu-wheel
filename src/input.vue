@@ -1,5 +1,5 @@
 <template>
-    <div :class="{error}" class="wrapper">
+    <div :class="{error}" class="wheel-toast">
         <input :disabled="disabled" :readonly="readonly" :value="value" @blur="$emit('blur', $event.target.value)"
                @change="$emit('change', $event.target.value)"
                @focus="$emit('focus', $event.target.value)"
@@ -48,7 +48,7 @@
     $font-size: 12px;
     $box-shadow-color: rgba(0, 0, 0, 0.5);
     $red: #F1453D;
-    .wrapper {
+    .wheel-toast {
         display: inline-flex;
         align-items: center;
         font-size: $font-size;
