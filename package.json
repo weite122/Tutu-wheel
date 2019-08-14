@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/weite122/Tutu-wheel#readme",
   "dependencies": {
+    "audit": "^0.0.6",
     "fstream": "^1.0.12",
     "js-yaml": "^3.13.1",
     "lodash": "^4.17.14",
