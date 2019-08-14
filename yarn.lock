@@ -4270,7 +4270,7 @@ gray-matter@^4.0.1:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/gray-matter/-/gray-matter-4.0.2.tgz#9aa379e3acaf421193fce7d2a28cebd4518ac454"
   dependencies:
-    js-yaml "^3.11.1"
+    js-yaml "^3.11.0"
     kind-of "^6.0.2"
     section-matter "^1.0.0"
     strip-bom-string "^1.0.0"
@@ -5005,7 +5005,7 @@ js-tokens@^3.0.0, js-tokens@^3.0.2:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
 
-js-yaml@^3.10.0, js-yaml@^3.11.0, js-yaml@^3.13.1:
+js-yaml@^3.10.0, js-yaml@^3.11.0, js-yaml@^3.11.1, js-yaml@^3.13.1:
   version "3.13.1"
   resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.13.1.tgz#aff151b30bfdfa8e49e05da22e7415e9dfa37847"
   dependencies:
@@ -6458,7 +6458,7 @@ parcel-bundler@^1.12.3:
     htmlnano "^0.2.2"
     is-glob "^4.0.0"
     is-url "^1.2.2"
-    js-yaml "^3.10.0"
+    js-yaml "^3.13.1"
     json5 "^1.0.1"
     micromatch "^3.0.4"
     mkdirp "^0.5.1"
@@ -8429,7 +8429,7 @@ svgo@^0.7.0:
     coa "~1.0.1"
     colors "~1.1.2"
     csso "~2.3.1"
-    js-yaml "~3.7.0"
+    js-yaml "~^3.7.0"
     mkdirp "~0.5.1"
     sax "~1.2.1"
     whet.extend "~0.9.9"
