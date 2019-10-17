@@ -51,33 +51,44 @@ Vue.use(plugin)
 new Vue({
   el: "#app",
   data: {
-    selectedTab: ['2','1']
+    source: [{
+      name: '浙江',
+      children: [
+        {
+          name: '杭州',
+          children: [
+            {name: '上城'},
+            {name: '下城'},
+            {name: '江干'},
+          ]
+        },
+        {
+          name: '嘉兴',
+          children: [
+            {name: '南湖'},
+            {name: '秀洲'},
+            {name: '嘉善'},
+          ]
+        },
+      ]
+    }, {
+      name: '福建',
+      children: [
+        {
+          name: '福州',
+          children: [
+            {name: '鼓楼'},
+            {name: '台江'},
+            {name: '仓山'},
+          ]
+        },
+      ]
+    }]
   },
   created() {
 
   },
   methods:{
-    showToast1() {
-      this.showToast('top')
-    },
-    showToast2() {
-      this.showToast('middle')
-    },
-    showToast3() {
-      this.showToast('bottom')
-    },
-    showToast(position) {
-      this.$toast(`你的智商目前为 ${parseInt(Math.random() *100)}。你的智商需要充值`, {
-        position,
-        enableHtml: false,
-        closeButton: {
-          text: '已充值',
-          callback () {
-            console.log('他说已经充值智商了')
-          }
-        },
-        autoClose: 3
-      })
-    }
+
   }
 })
