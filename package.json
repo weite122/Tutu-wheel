@@ -1,58 +1,33 @@
 {
-  "name": "tutu-test-1-1",
-  "version": "0.0.3",
-  "description": "这是一个VUE UI框架",
-  "main": "dist/index.js",
+  "name": "hello-world",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "start": "parcel index.html --no-cache",
-    "dev-test": "parcel watch test/* --no-cache & karma start",
-    "test": "parcel build test/* --no-cache --no-minify && karma start --single-run",
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "test:unit": "vue-cli-service test:unit"
   },
-  "repository": "git+https://github.com/weite122/Tutu-wheel.git",
-  "keywords": [
-    "vue",
-    "ui"
-  ],
-  "author": "weite122",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/weite122/Tutu-wheel/issues"
-  },
-  "homepage": "https://github.com/weite122/Tutu-wheel#readme",
   "dependencies": {
-    "audit": "^0.0.6",
-    "fstream": "^1.0.12",
-    "js-yaml": "^3.13.1",
-    "lodash": "^4.17.14",
-    "lodash.template": "^4.5.0",
-    "safer-eval": "^1.3.5",
-    "vue": "^2.6.4",
-    "vue-hot-reload-api": "^2.3.1"
+    "core-js": "^3.1.2",
+    "vue": "^2.6.10"
   },
   "devDependencies": {
-    "@vue/component-compiler-utils": "^2.5.2",
-    "chai": "^4.2.0",
-    "chai-spies": "^1.0.0",
-    "karma": "^4.1.0",
-    "karma-chai": "^0.1.0",
-    "karma-chai-spies": "^0.1.4",
-    "karma-chrome-launcher": "^2.2.0",
-    "karma-mocha": "^1.3.0",
-    "karma-sinon-chai": "^2.0.2",
-    "mocha": "^5.2.0",
-    "node-sass": "^4.9.2",
-    "parcel-bundler": "^1.12.3",
-    "sass": "^1.17.0",
-    "sass-loader": "^7.1.0",
-    "sinon": "^7.2.3",
-    "sinon-chai": "^3.3.0",
-    "stylus": "^0.54.5",
-    "vue-template-compiler": "^2.6.4",
-    "vuepress": "^0.14.11"
+    "@vue/cli-plugin-babel": "^4.0.0",
+    "@vue/cli-plugin-unit-mocha": "^4.0.0",
+    "@vue/cli-service": "^4.0.0",
+    "@vue/test-utils": "1.0.0-beta.29",
+    "chai": "^4.1.2",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^8.0.0",
+    "vue-template-compiler": "^2.6.10"
   },
-  "alias": {
-    "vue": "./node_modules/vue/dist/vue.common.js"
-  }
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ]
 }
