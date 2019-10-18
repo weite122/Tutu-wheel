@@ -1,25 +1,27 @@
 <template>
   <div class="cascader">
-    <div class="trigger">
-      <slot></slot>
+    <div class="trigger" @click="popoverVisible = !popoverVisible">
     </div>
-    <div class="popover">
-      <div v-for="item in source">
-        <cascader-item :sourceItem="item"></cascader-item>
-      </div>
+    <div class="popover" v-if="popoverVisible">
+      <cascader-items :items="source"></cascader-items>
     </div>
   </div>
 </template>
 
 <script>
-  import CascaderItem from './cascader-item'
+  import CascaderItems from './cascader-items'
 
   export default {
     name: "WheelCascader",
-    components: {CascaderItem},
+    components: {CascaderItems},
     props: {
       source: {
         type: Array
+      }
+    },
+    data() {
+      return {
+        popoverVisible: false
       }
     }
   }
@@ -27,36 +29,20 @@
 
 <style lang="scss" scoped>
   @import "_var";
+  .cascader {
+    .trigger {
+      border: 1px solid #2d2d2d;
+      height: 32px;
+      width: 100px;
+    }
+    .popover {
+      border: 2px solid #2d2d2d;
+      height: 200px;
+      display: flex;
+      .label {
+        white-space: nowrap;
+      }
+    }
+  }
 </style>
 
-<!--<template>-->
-  <!--<div class="cascader">-->
-    <!--<div class="trigger">-->
-      <!--<slot></slot>-->
-    <!--</div>-->
-    <!--<div class="popover">-->
-      <!--<div v-for="item in source">-->
-        <!--<cascader-item :sourceItem="item"></cascader-item>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-<!--</template>-->
-
-<!--<script>-->
-  <!--import CascaderItem from './cascader-item'-->
-  <!--export default {-->
-    <!--name: 'WheelCascader',-->
-    <!--components: {CascaderItem},-->
-    <!--props: {-->
-      <!--source: {-->
-        <!--type: Array-->
-      <!--}-->
-    <!--}-->
-  <!--}-->
-<!--</script>-->
-
-<!--<style scoped lang="scss">-->
-  <!--@import "_var";-->
-  <!--.cascader {-->
-  <!--}-->
-<!--</style>-->

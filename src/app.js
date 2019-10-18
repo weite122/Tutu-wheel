@@ -23,9 +23,7 @@ import Toast from './toast'
 import Vue from 'vue'
 
 
-
-
-Vue.component('g-button',Button)
+Vue.component('g-button', Button)
 Vue.component('g-button-group', ButtonGroup)
 Vue.component('g-cascader', Cascader)
 Vue.component('g-col', Col)
@@ -34,7 +32,7 @@ Vue.component('g-collapse-item', CollapseItem)
 Vue.component('g-content', Content)
 Vue.component('g-footer', Footer)
 Vue.component('g-header', Header)
-Vue.component('g-icon',Icon)
+Vue.component('g-icon', Icon)
 Vue.component('g-input', Input)
 Vue.component('g-layout', Layout)
 Vue.component('g-popover', Popover)
@@ -50,7 +48,7 @@ Vue.use(plugin)
 
 new Vue({
   el: "#app",
-  data: {
+    data: {
     source: [{
       name: '浙江',
       children: [
@@ -83,12 +81,20 @@ new Vue({
           ]
         },
       ]
+    }, {
+      name: '安徽',
+      children: [{
+        name: '合肥',
+        children: [{
+          name: '瑶海'
+        }, {
+          name: '庐阳'
+        }]
+      }]
     }]
   },
   created() {
 
   },
-  methods:{
-
-  }
+  methods: {}
 })
