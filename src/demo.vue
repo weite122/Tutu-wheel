@@ -1,21 +1,28 @@
 <template>
   <div>
-    <p>11111</p>
-    <g-cascader :source="source" popover-height="200px"></g-cascader>
+    <p>{{selected}}</p>
+    <g-cascader
+      :source="source"
+      popover-height="200px"
+      :selected="selected"
+      @update:selected="selected = $event"
+    ></g-cascader>
     <p>22222</p>
   </div>
 </template>
 <script>
   import Button from "./button";
   import Cascader from "./cascader";
+
   export default {
     name: "demo",
     components: {
       "g-button": Button,
       "g-cascader": Cascader
     },
-    data () {
+    data() {
       return {
+        selected: [],
         source: [
           {
             name: "浙江",
