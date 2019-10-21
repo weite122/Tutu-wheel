@@ -33,14 +33,15 @@
       },
       selected: {
         type: Array,
-        default: () => {
-          return []
-        }
+        default: () => []
       },
       level: {
         type: Number,
         default: 0
       }
+    },
+    update(){
+      // console.log(JSON.stringify(this.items))
     },
     computed: {
       rightItems() {
@@ -75,6 +76,7 @@
     .left {
       height: 100%;
       padding: .3em 0;
+      overflow: auto;
     }
     .right {
       height: 100%;
