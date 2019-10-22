@@ -33,7 +33,7 @@
           return []
         }
       },
-      lodeData:{
+      loadData:{
         type: Function
       }
     },
