@@ -9,6 +9,7 @@
                       :selected="selected"
                       :height="popoverHeight"
                       @update:selected="onUpdateSelected"
+                      :loadDate="loadData"
       ></cascader-items>
     </div>
   </div>
@@ -82,7 +83,9 @@
           toUpdate.children = result
           this.$emit('update:source', copy)
         }
-        this.loadData(lastItem, updateSource)
+        if(!lastItem.isLeaf) {
+          this.loadData && this.loadData(lastItem, updateSource)
+        }
       }
     },
     computed: {
