@@ -94,6 +94,7 @@
       display: flex;
       cursor: pointer;
       align-items: center;
+      white-space: nowrap;
       &:hover {
         background: $grey;
       }
