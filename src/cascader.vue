@@ -1,5 +1,5 @@
 <template>
-  <div class="cascader" ref="cascader">
+  <div class="cascader" ref="cascader" v-click-outside="close">
     <div class="trigger" @click="toggle">
       <span>{{result || '&nbsp;'}}</span>
     </div>
@@ -17,10 +17,12 @@
 
 <script>
   import CascaderItems from './cascader-items'
+  import ClickOutside from './click-outside'
 
   export default {
     name: "WheelCascader",
     components: {CascaderItems},
+    directives: {ClickOutside},
     props: {
       source: {
         type: Array
@@ -34,7 +36,7 @@
           return []
         }
       },
-      loadData:{
+      loadData: {
         type: Function
       }
     },
@@ -44,24 +46,14 @@
       }
     },
     methods: {
-      onClickDocument(e){
-        let {cascader} = this.$refs
-        let {target} = e
-        if(cascader === target || cascader.contains(target)){return}
-        this.close()
-      },
-      open(){
+      open() {
         this.popoverVisible = true
-        this.$nextTick(()=> {
-          document.addEventListener('click',this.onClickDocument)
-        })
       },
-      close(){
-        this.popoverVisible=false
-        document.removeEventListener('click', this.onClickDocument)
+      close() {
+        this.popoverVisible = false
       },
-      toggle(){
-        if(this.popoverVisible === true) {
+      toggle() {
+        if (this.popoverVisible === true) {
           this.close()
         } else {
           this.open()
@@ -88,8 +80,9 @@
             return found
           } else {
             found = simplest(hasChildren, id)
-            if (found) { return found }
-            else {
+            if (found) {
+              return found
+            } else {
               for (let i = 0; i < hasChildren.length; i++) {
                 found = complex(hasChildren[i].children, id)
                 if (found) {
@@ -106,7 +99,7 @@
           toUpdate.children = result
           this.$emit('update:source', copy)
         }
-        if(!lastItem.isLeaf) {
+        if (!lastItem.isLeaf) {
           this.loadData && this.loadData(lastItem, updateSource)
         }
       }
@@ -123,12 +116,12 @@
   @import "_var";
   .cascader {
     position: relative;
-    display:inline-block;
+    display: inline-block;
     border: 1px solid darkred;
     .trigger {
-      height:$input-height;
-      display:inline-flex;
-      align-items:center;
+      height: $input-height;
+      display: inline-flex;
+      align-items: center;
       padding: 0 1em;
       min-width: 10em;
       border: 1px solid $border-color;
