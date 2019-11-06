@@ -1,11 +1,11 @@
 <template>
-    <button :class="{[`icon-${iconPosition}`]: true}" @click="$emit('click')" class="g-button">
-        <g-icon :name="icon" class="icon" v-if="icon && !loading"></g-icon>
-        <g-icon class="loading icon" name="loading" v-if="loading"></g-icon>
-        <div class="g-button-content">
-            <slot></slot>
-        </div>
-    </button>
+  <button :class="{[`icon-${iconPosition}`]: true}" @click="$emit('click')" class="g-button">
+    <g-icon :name="icon" class="icon" v-if="icon && !loading"></g-icon>
+    <g-icon class="loading icon" name="loading" v-if="loading"></g-icon>
+    <div class="g-button-content">
+      <slot></slot>
+    </div>
+  </button>
 </template>
 
 <script>
@@ -34,38 +34,24 @@
 </script>
 
 <style lang="scss" scoped>
-    @import "_var";
-
-    @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
+  @import "_var";
+  .g-button { font-size: $font-size; height: $button-height; padding: 0 1em;
+    border-radius: $border-radius; border: 1px solid $border-color;
+    background: $button-bg;
+    display: inline-flex; justify-content: center; align-items: center;
+    vertical-align: middle;
+    &:hover { border-color: $border-color-hover; }
+    &:active { background-color: $button-active-bg; }
+    &:focus { outline: none; }
+    > .g-button-content { order: 2; }
+    > .icon { order: 1; margin-right: .1em; }
+    &.icon-right {
+      > .g-button-content { order: 1; }
+      > .icon { order: 2; margin-right: 0; margin-left: .1em;}
     }
-
-    .g-button { font-size: $font-size; height: $button-height; padding: 0 1em;
-        border-radius: $border-radius; border: 1px solid $border-color;
-        background: $button-bg;
-        display: inline-flex; justify-content: center; align-items: center;
-        vertical-align: middle;
-
-        &:hover { border-color: $border-color-hover; }
-
-        &:active { background-color: $button-active-bg; }
-
-        &:focus { outline: none; }
-
-        > .g-button-content { order: 2; }
-
-        > .icon { order: 1; margin-right: .1em; }
-
-        &.icon-right {
-            > .g-button-content { order: 1; }
-
-            > .icon { order: 2; margin-right: 0; margin-left: .1em;}
-        }
-
-        .loading {
-            animation: spin 2s infinite linear;
-        }
+    .loading {
+      animation: spin 2s infinite linear;
     }
+  }
 
 </style>

@@ -10,6 +10,7 @@
                       :height="popoverHeight"
                       @update:selected="onUpdateSelected"
                       :loadData="loadData"
+                      :loading-item="loadingItem"
       ></cascader-items>
     </div>
   </div>
@@ -42,7 +43,8 @@
     },
     data() {
       return {
-        popoverVisible: false
+        popoverVisible: false,
+        loadingItem: {},
       }
     },
     methods: {
@@ -94,14 +96,15 @@
           }
         }
         let updateSource = (result) => {
+          this.loadingItem = {}
           let copy = JSON.parse(JSON.stringify(this.source))
           let toUpdate = complex(copy, lastItem.id)
           toUpdate.children = result
           this.$emit('update:source', copy)
         }
-        if (!lastItem.isLeaf) {
-          this.loadData && this.loadData(lastItem, updateSource)
-        }
+        if (!lastItem.isLeaf && this.loadData) {
+          this.loadData(lastItem, updateSource)
+          this.loadingItem = lastItem
       }
     },
     computed: {
@@ -119,6 +122,7 @@
     display: inline-block;
     border: 1px solid darkred;
     .trigger {
+      background: white;
       height: $input-height;
       display: inline-flex;
       align-items: center;
@@ -133,6 +137,7 @@
       left: 0;
       background: white;
       margin-top: 8px;
+      z-index: 1;
       display: flex;
       @extend .box-shadow;
     }
