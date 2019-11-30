@@ -105,11 +105,12 @@
         if (!lastItem.isLeaf && this.loadData) {
           this.loadData(lastItem, updateSource)
           this.loadingItem = lastItem
-      }
-    },
-    computed: {
-      result() {
-        return this.selected.map((item) => item.name).join('/')
+        }
+      },
+      computed: {
+        result() {
+          return this.selected.map((item) => item.name).join('/')
+        }
       }
     }
   }
