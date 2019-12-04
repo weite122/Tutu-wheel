@@ -1,23 +1,44 @@
 <template>
   <div class="g-slides">
     <div class="g-slides-window" ref="window">
-      <slot></slot>
+      <div class="g-slides-wrapper">
+        <slot></slot>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
   export default {
+    props: {
+      selected: {
+        type: String
+      }
+    },
     mounted() {
-      console.log(this.$children);
-      console.log(this.$refs.window.children);
+      this.updateChildren()
+    },
+    updated() {
+      this.updateChildren()
+    },
+    methods: {
+      updateChildren() {
+        let first = this.$children[0]
+        let selected = this.selected || first.name
+        this.$children.forEach((vm) => {
+          vm.selected = selected
+        })
+      }
     }
   }
 </script>
 
 <style lang="scss" scoped>
   .g-slides {
-    &-window {
+    display: inline-block;
+    border: 1px solid black;
+    &-wrapper{
+      position: relative;
     }
   }
 </style>
