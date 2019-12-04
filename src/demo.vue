@@ -1,13 +1,13 @@
 <template>
   <div>
-    <g-slides class="wrapper" width="300px" height="200px" :selected="selected">
-      <g-slides-item name="1">
+    <g-slides class="wrapper"  :selected.sync="selected">
+      <g-slides-item name="aaa">
         <div class="box">1</div>
       </g-slides-item>
-      <g-slides-item name="2">
+      <g-slides-item name="bbb">
         <div class="box">2</div>
       </g-slides-item>
-      <g-slides-item name="3">
+      <g-slides-item name="ccc">
         <div class="box">3</div>
       </g-slides-item>
     </g-slides>
@@ -24,18 +24,11 @@
     },
     data() {
       return {
-        selected: undefined
+        selected: 'ccc'
       };
     },
     created() {
-      let n = 1
-      setInterval(() => {
-        if (n === 4) {
-          n = 1
-        }
-        this.selected = n.toString()
-        n++
-      }, 3000)
+
     },
     methods: {}
   };

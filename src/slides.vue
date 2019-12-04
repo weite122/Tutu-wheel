@@ -13,20 +13,48 @@
     props: {
       selected: {
         type: String
+      },
+      autoPlay: {
+        type: Boolean,
+        default: true
       }
     },
     mounted() {
       this.updateChildren()
+      this.playAutomatically()
     },
     updated() {
       this.updateChildren()
     },
     methods: {
-      updateChildren() {
+      playAutomatically() {
+        const names = this.$children.map(vm => vm.name)
+        const index = names.indexOf(this.getSelected())
+        let run = () => {
+          let newIndex = index - 1
+          if (newIndex === -1) {
+            newIndex = names.length - 1
+          }
+          if (newIndex === names.length) {
+            newIndex = 0
+          }
+          this.$emit('update:selected', names[newIndex])
+          setTimeout(run, 3000)
+        }
+        setTimeout(run, 3000)
+      },
+      getSelected() {
         let first = this.$children[0]
-        let selected = this.selected || first.name
+        return this.selected || first.name
+      },
+      updateChildren() {
+        let selected = this.getSelected()
         this.$children.forEach((vm) => {
           vm.selected = selected
+          const names = this.$children.map(vm => vm.name)
+          let newIndex = names.indexOf(selected)
+          let oldIndex = names.indexOf(vm.name)
+          vm.reverse = newIndex > oldIndex ? false : true
         })
       }
     }
@@ -37,7 +65,8 @@
   .g-slides {
     display: inline-block;
     border: 1px solid black;
-    &-wrapper{
+    &-window {overflow: hidden;}
+    &-wrapper {
       position: relative;
     }
   }
