@@ -39,8 +39,8 @@
     margin: 40px;
   }
   .box {
-    width: 200px;
-    height: 150px;
+    width: 100%;
+    height: 350px;
     background: #ddd;
     border: 1px solid red;
   }
