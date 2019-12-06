@@ -37,7 +37,7 @@
     height: 100%;
   }
   .slide-enter-active, .slide-leave-active {
-    transition: all 3s;
+    transition: all .5s;
   }
   .slide-enter {
     transform: translateX(100%);

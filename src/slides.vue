@@ -49,8 +49,8 @@
     },
     methods: {
       playAutomatically() {
-        let index = this.names.indexOf(this.getSelected())
         let run = () => {
+          let index = this.names.indexOf(this.getSelected())
           let newIndex = index - 1
           if (newIndex === -1) {
             newIndex = this.names.length - 1
@@ -61,6 +61,7 @@
           this.select(newIndex)
           setTimeout(run, 3000)
         }
+        setTimeout(run, 3000)
       },
       select(index) {
         this.lastSelectedIndex = this.selectedIndex
@@ -85,7 +86,6 @@
 
 <style lang="scss" scoped>
   .g-slides {
-    border: 1px solid black;
     &-window {overflow: hidden;}
     &-wrapper {
       position: relative;
