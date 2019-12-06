@@ -24,7 +24,7 @@
     },
     data() {
       return {
-        selected: 'ccc'
+        selected: undefined
       };
     },
     created() {

@@ -1,5 +1,5 @@
 <template>
-  <div class="g-slides">
+  <div class="g-slides" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
     <div class="g-slides-window" ref="window">
       <div class="g-slides-wrapper">
         <slot></slot>
@@ -28,7 +28,8 @@
     data() {
       return {
         childrenLength: 0,
-        lastSelectedIndex: undefined
+        lastSelectedIndex: undefined,
+        timerId: undefined
       }
     },
     mounted() {
@@ -48,7 +49,20 @@
       }
     },
     methods: {
+      onMouseEnter() {
+        this.pause()
+      },
+      onMouseLeave() {
+        this.playAutomatically()
+      },
+      pause() {
+        window.clearTimeout(this.timerId)
+        this.timerId = undefined
+      },
       playAutomatically() {
+        if (this.timerId) {
+          return
+        }
         let run = () => {
           let index = this.names.indexOf(this.getSelected())
           let newIndex = index - 1
@@ -59,9 +73,9 @@
             newIndex = 0
           }
           this.select(newIndex)
-          setTimeout(run, 3000)
+          this.timerId = setTimeout(run, 3000)
         }
-        setTimeout(run, 3000)
+        this.timerId = setTimeout(run, 3000)
       },
       select(index) {
         this.lastSelectedIndex = this.selectedIndex
@@ -74,7 +88,16 @@
       updateChildren() {
         let selected = this.getSelected()
         this.$children.forEach((vm) => {
-          vm.reverse = this.selectedIndex <= this.lastSelectedIndex
+          let reverse = this.selectedIndex <= this.lastSelectedIndex
+          if (this.timerId) {
+            if (this.lastSelectedIndex === this.$children.length - 1 && this.selectedIndex === 0) {
+              reverse = false
+            }
+            if (this.lastSelectedIndex === 0 && this.selectedIndex === this.$children.length - 1) {
+              reverse = true
+            }
+          }
+          vm.reverse = reverse
           this.$nextTick(() => {
             vm.selected = selected
           })
@@ -91,9 +114,29 @@
       position: relative;
     }
     &-dots {
+      padding: 8px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       > span {
+        width: 20px;
+        height: 20px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        background: #ddd;
+        border-radius: 50%;
+        margin: 0 8px;
+        font-size: 12px;
+        &:hover {
+          cursor: pointer;
+        }
         &.active {
-          background: red;
+          background: black;
+          color: white;
+          &:hover {
+            cursor: default;
+          }
         }
       }
     }
