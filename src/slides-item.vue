@@ -1,9 +1,16 @@
 <template>
-  <transition name="slide">
+  <template v-if="animationEnabled">
+    <transition name="slide">
+      <div class="g-slides-item" v-if="visible" :class="{reverse}">
+        <slot></slot>
+      </div>
+    </transition>
+  </template>
+  <template v-else>
     <div class="g-slides-item" v-if="visible" :class="{reverse}">
       <slot></slot>
     </div>
-  </transition>
+  </template>
 </template>
 
 <script>
@@ -18,8 +25,12 @@
     data() {
       return {
         selected: undefined,
-        reverse: false
+        reverse: false,
+        animationEnabled: true
       }
+    },
+    updated() {
+      this.animationEnabled = true
     },
     computed: {
       visible() {
