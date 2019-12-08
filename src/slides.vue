@@ -15,6 +15,7 @@
         <g-icon name="left"/>
       </span>
       <span v-for="n in childrenLength" :class="{active: selectedIndex === n -1}"
+            :key="n" :data-index="n-1"
             @click="select(n-1)">
         {{n}}
       </span>
@@ -27,8 +28,9 @@
 
 <script>
   import GIcon from './icon'
+
   export default {
-    components:{GIcon},
+    components: {GIcon},
     props: {
       selected: {
         type: String
@@ -36,6 +38,10 @@
       autoPlay: {
         type: Boolean,
         default: true
+      },
+      autoPlayDelay: {
+        type: Number,
+        default: 3000
       }
     },
     data() {
@@ -48,7 +54,9 @@
     },
     mounted() {
       this.updateChildren()
-      this.playAutomatically()
+      if(this.autoPlay){
+        this.playAutomatically()
+      }
       this.childrenLength = this.items.length
     },
     updated() {
@@ -62,8 +70,8 @@
       names() {
         return this.items.map(vm => vm.name)
       },
-      items(){
-        return this.$children.filter(vm=>vm.$options.name === 'WheelSlidesItem')
+      items() {
+        return this.$children.filter(vm => vm.$options.name === 'WheelSlidesItem')
       }
     },
     methods: {
@@ -106,10 +114,10 @@
           this.playAutomatically()
         })
       },
-      onClickPrev(){
+      onClickPrev() {
         this.select(this.selectedIndex - 1)
       },
-      onClickNext(){
+      onClickNext() {
         this.select(this.selectedIndex + 1)
       },
       playAutomatically() {
@@ -120,9 +128,9 @@
           let index = this.names.indexOf(this.getSelected())
           let newIndex = index + 1
           this.select(newIndex)
-          this.timerId = setTimeout(run, 3000)
+          this.timerId = setTimeout(run, this.autoPlayDelay)
         }
-        this.timerId = setTimeout(run, 3000)
+        this.timerId = setTimeout(run, this.autoPlayDelay)
       },
       select(newIndex) {
         this.lastSelectedIndex = this.selectedIndex
