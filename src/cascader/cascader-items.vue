@@ -28,7 +28,7 @@
 </template>
 
 <script>
-  import Icon from './icon'
+  import Icon from '../icon'
 
   export default {
     name: "WheelCascaderItems",
@@ -87,7 +87,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import "_var";
+  @import "../_var.css";
   .cascaderItem {
     display: flex;
     align-items: flex-start;
