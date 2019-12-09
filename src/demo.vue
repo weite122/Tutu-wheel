@@ -1,50 +1,30 @@
 <template>
   <div>
-    <g-slides class="wrapper"  :selected.sync="selected">
-      <g-slides-item name="aaa">
-        <div class="box">1</div>
-      </g-slides-item>
-      <g-slides-item name="bbb">
-        <div class="box">2</div>
-      </g-slides-item>
-      <g-slides-item name="ccc">
-        <div class="box">3</div>
-      </g-slides-item>
-    </g-slides>
+    <g-nav :selected="selected" multiple>
+      <g-nav-item name="home">首页</g-nav-item>
+      <g-nav-item name="about">关于</g-nav-item>
+      <g-nav-item name="hire">招聘</g-nav-item>
+    </g-nav>
   </div>
 </template>
 <script>
-  import GSlides from "./slides/slides";
-  import GSlidesItem from './slides/slides-item'
+  import GNav from "./nav/nav";
+  import GNavItem from "./nav/nav-item";
+  import GSubNav from "./nav/sub-nav";
 
   export default {
     name: "demo",
     components: {
-      GSlides, GSlidesItem
+      GNav, GNavItem, GSubNav
     },
     data() {
       return {
-        selected: undefined
+        selected: ['home']
       };
     },
-    created() {
-
-    },
-    methods: {}
   };
 </script>
 <style>
   * {margin: 0; padding: 0; box-sizing: border-box;}
-  .wrapper {
-    margin: 40px;
-  }
-  .box {
-    width: 100%;
-    height: 350px;
-    background: #ddd;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 30px;
-  }
+
 </style>
