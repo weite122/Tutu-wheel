@@ -1,12 +1,17 @@
 <template>
-<div class="g-nav">
-  <slot></slot>
-</div>
+  <div class="g-nav">
+    <slot></slot>
+  </div>
 </template>
 
 <script>
   export default {
     name: "WheelNav",
+    provide(){
+      return {
+        root:this
+      }
+    },
     props: {
       selected: {
         type: Array,
@@ -17,6 +22,11 @@
         default: false
       }
     },
+    data(){
+      return {
+        items: []
+      }
+    },
     mounted() {
       this.updateChildren()
       this.listenToChildren()
@@ -24,12 +34,10 @@
     updated() {
       this.updateChildren()
     },
-    computed: {
-      items() {
-        return this.$children.filter(vm => vm.$options.name = 'WheelNavItem')
-      }
-    },
     methods: {
+      addItem(vm){
+        this.items.push(vm)
+      },
       updateChildren() {
         this.items.forEach(vm => {
           if (this.selected.indexOf(vm.name) >= 0) {
@@ -59,8 +67,8 @@
 </script>
 
 <style lang="scss" scoped>
-.g-nav{
-  display: flex;
-  border: 1px solid gray;
-}
+  .g-nav {
+    display: flex;
+    border: 1px solid gray;
+  }
 </style>

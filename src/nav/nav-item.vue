@@ -7,11 +7,15 @@
 <script>
   export default {
     name: "WheelNavItem",
+    inject: ['root'],
     props: {
       name: {
         type: String,
         required: true
       }
+    },
+    created() {
+      this.root.addItem(this)
     },
     data() {
       return {
@@ -34,3 +38,5 @@
     }
   }
 </style>
+
+
