@@ -7,9 +7,9 @@
 <script>
   export default {
     name: "WheelNav",
-    provide(){
+    provide() {
       return {
-        root:this
+        root: this
       }
     },
     props: {
@@ -22,7 +22,7 @@
         default: false
       }
     },
-    data(){
+    data() {
       return {
         items: []
       }
@@ -35,7 +35,7 @@
       this.updateChildren()
     },
     methods: {
-      addItem(vm){
+      addItem(vm) {
         this.items.push(vm)
       },
       updateChildren() {
