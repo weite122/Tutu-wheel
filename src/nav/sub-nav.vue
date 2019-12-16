@@ -1,17 +1,24 @@
 <template>
   <div class="g-sub-nav" :class="{active}" v-click-outside="close">
     <span class="g-sub-nav-label" @click="onClick">
-      <slot name="title"></slot>
+      <slot name="title"/>
       <span class="g-sub-nav-icon" :class="{open}">
-        <g-icon name="right"></g-icon>
+        <g-icon name="right"/>
       </span>
      </span>
-    <transition @enter="enter" @leave="leave" @after-leave="afterLeave"
-                @after-enter="afterEnter">
-      <div class="g-sub-nav-popover" v-show="open" :class="{vertical}">
-        <slot></slot>
+    <template v-if="vertical">
+      <transition @enter="enter" @leave="leave" @after-leave="afterLeave"
+                  @after-enter="afterEnter">
+        <div class="g-sub-nav-popover" v-show="open" :class="{vertical}">
+          <slot/>
+        </div>
+      </transition>
+    </template>
+    <template v-else>
+      <div class="g-sub-nav-popover" v-show="open">
+        <slot/>
       </div>
-    </transition>
+    </template>
   </div>
 </template>
 
@@ -100,6 +107,7 @@
     &-label { padding: 10px 20px; display: block; }
     &-icon { display: none; }
     &-popover {
+      transition: height 250ms;
       background: white;
       position: absolute;
       top: 100%;
@@ -116,7 +124,6 @@
         border-radius: 0;
         border: none;
         box-shadow: none;
-        transition: height 250ms;
         overflow: hidden;
       }
     }
