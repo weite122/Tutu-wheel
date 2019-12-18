@@ -56,9 +56,10 @@
     },
     data() {
       return {
-        selected: ['culture']
+        selected: 'culture'
       };
     },
+
   };
 </script>
 <style>
