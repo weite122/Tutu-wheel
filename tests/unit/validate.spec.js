@@ -72,4 +72,27 @@ describe('validate', () => {
     let errors = validate(data, rules)
     expect(errors.email).to.not.exist
   })
+  it('required & pattern', () => {
+    let data = {
+      email: ''
+    }
+    let rules = [
+      {key: 'email', pattern: 'email', required: true}
+    ]
+    let errors = validate(data, rules)
+    expect(errors.email.required).to.exist
+    expect(errors.email.pattern).to.not.exist
+  })
+
+  it('pattern & minLength', () => {
+    let data = {
+      email: ''
+    }
+    let rules = [
+      {key: 'email', pattern: 'email', minLength: 6}
+    ]
+    let errors = validate(data, rules)
+    expect(errors.email.minLength).to.exist
+    expect(errors.email.pattern).to.exist
+  })
 })
