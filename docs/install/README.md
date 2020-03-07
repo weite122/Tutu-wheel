@@ -7,11 +7,11 @@ title: 安装
 本章节待完善
 
 ```bash
-npm install Tutu-Wheel
+npm install Tutu-wheel
 ```
 
 或
 
 ```bash
-yarn add Tutu-Wheel
+yarn add Tutu-wheel
 ```

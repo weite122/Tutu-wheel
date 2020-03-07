@@ -14,7 +14,7 @@ title: 快速上手
 ## Hello World
 
 ```javascript
-import {Button} from 'gulu'
+import {Button} from 'Tutu-wheel'
 import Vue from 'vue'
 
 new Vue({
