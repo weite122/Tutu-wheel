@@ -41,7 +41,7 @@
 </script>
 
 <style lang="scss" scoped>
-    @import "_var";
+    @import "_var.scss";
     $height: $input-height;
     .wheel-toast {
         display: inline-flex;
