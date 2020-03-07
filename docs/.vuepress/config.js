@@ -1,4 +1,4 @@
-
+const path = require('path')
 module.exports = {
   base:'/Tutu-wheel/',
   title: 'Tutu-wheel UI',
