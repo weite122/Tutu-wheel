@@ -1,6 +1,7 @@
+
 module.exports = {
   base:'/Tutu-wheel/',
-  title: 'Tutu-Wheel UI',
+  title: 'Tutu-wheel UI',
   description: '一个好用的UI框架',
   themeConfig: {
     nav: [
@@ -27,8 +28,10 @@ module.exports = {
           '/components/toast',
           '/components/popover'
         ]
-      },
-
+      }
     ]
+  },
+  scss:{
+    includePaths: [path.join(__dirname, '../../styles')]
   }
 }
