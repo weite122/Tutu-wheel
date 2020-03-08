@@ -1,52 +1,88 @@
 <template>
   <div class="wheel-pager">
-    <span v-for="page in pages">
+    <span v-for="page in pages"
+          class="wheel-pager-item"
+          :class="{active:page === currentPage, separator: page ==='...'}">
       {{page}}
     </span>
   </div>
 </template>
 
 <script>
-  export default {
-    name: "WheelPager",
-    props: {
-      totalPage: {
-        type: Number,
-        required: true
-      },
-      currentPage: {
-        type: Number,
-        required: true
-      },
-      hideIfOnePage: {
-        type: Boolean,
-        default: true
-      }
+export default {
+  name: "WheelPager",
+  props: {
+    totalPage: {
+      type: Number,
+      required: true
     },
-    data() {
-      let pages = [1, this.totalPage, this.currentPage, this.currentPage - 1, this.currentPage - 2, this.currentPage + 1, this.currentPage + 2]
-      let u = unique(pages.sort((a, b) => a - b))
-      let u2 = u.reduce((prev, current, index, array) => {
-        prev.push(current)
-        array[index + 1] !== undefined && array[index + 1] - array[index] > 1 && prev.push('...')
-        return prev
-      }, [])
-      return {
-        pages: u2
-      }
+    currentPage: {
+      type: Number,
+      required: true
+    },
+    hideIfOnePage: {
+      type: Boolean,
+      default: true
     }
+  },
+  data() {
+    let pages = unique(
+      [
+        1,
+        this.totalPage,
+        this.currentPage,
+        this.currentPage - 1,
+        this.currentPage - 2,
+        this.currentPage + 1,
+        this.currentPage + 2
+      ].sort((a, b) => a - b)
+    ).reduce((prev, current, index, array) => {
+      prev.push(current);
+      array[index + 1] !== undefined &&
+        array[index + 1] - array[index] > 1 &&
+        prev.push("...");
+      return prev;
+    }, []);
+    return {
+      pages
+    };
   }
+};
 
-  function unique(array) {
-    // return [...new Set(array)]
-    const object = {}
-    array.map((number) => {
-      object[number] = true
-    })
-    return Object.keys(object).map((s) => parseInt(s, 10))
-  }
+function unique(array) {
+  // return [...new Set(array)]
+  const object = {};
+  array.map(number => {
+    object[number] = true;
+  });
+  return Object.keys(object).map(s => parseInt(s, 10));
+}
 </script>
 
 <style scoped lang="scss">
-
+@import "_var.scss";
+.wheel-pager {
+  &-item {
+    border: 1px solid #e1e1e1;
+    border-radius: $border-radius;
+    padding: 0 4px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size:12px;
+    min-width: 20px;
+    height: 20px;
+    margin: 0 4px;
+    cursor: pointer;
+    &.separator{
+    border: none;
+  }
+    &.active, &:hover{
+      border-color: $green;
+    }
+    &.active{
+      cursor: default;
+    }
+  }
+}
 </style>

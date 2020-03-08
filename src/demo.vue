@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="margin: 20px auto">
     <g-pager :total-page="20" :current-page="3"></g-pager>
   </div>
 </template>
