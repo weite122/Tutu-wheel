@@ -11,7 +11,7 @@
                 header
             </g-header>
             <g-layout>
-                <g-sider style="height: 100px; background:#ddd; width:200px; color: black;">
+                <g-sider style="height: 100px; background:#66CC99; width:200px; color: black;">
                     sider
                 </g-sider>
                 <g-content style="height: 100px; background:#2a8a5e;">
@@ -50,7 +50,7 @@
                 header
             </g-header>
             <g-layout>
-                <g-sider style="height: 100px; background:#ddd; width:200px; color: black;">
+                <g-sider style="height: 100px; background:#66CC99; width:200px; color: black;">
                     sider
                 </g-sider>
                 <g-content style="height: 100px; background:#2a8a5e;">

@@ -1,15 +1,18 @@
 <template>
   <transition name="slide">
-    <div class="sider" v-if="visible">
+    <div class="wheel-sider" v-if="visible">
       <slot></slot>
-      <button @click="visible=false">close</button>
+      <g-button @click="visible=false">close</g-button>
     </div>
   </transition>
 </template>
 
 <script>
+  import GButton from '../button/button'
+
   export default {
     name: "WheelSider",
+    components: {GButton},
     data() {
       return {
         visible: true
@@ -20,8 +23,11 @@
 </script>
 
 <style lang="scss" scoped>
-  .sider {
+  .wheel-sider {
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     > button {
       position: absolute;
       top: 0;

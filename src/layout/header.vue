@@ -1,7 +1,7 @@
 <template>
-    <div class="header">
-        <slot></slot>
-    </div>
+  <div class="wheel-header">
+    <slot></slot>
+  </div>
 </template>
 
 <script>
@@ -11,5 +11,9 @@
 </script>
 
 <style lang="scss" scoped>
-
+  .wheel-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 </style>

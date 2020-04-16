@@ -1,7 +1,7 @@
 <template>
-    <div class="wheel-content">
-        <slot></slot>
-    </div>
+  <div class="wheel-content">
+    <slot></slot>
+  </div>
 </template>
 
 <script>
@@ -11,7 +11,10 @@
 </script>
 
 <style lang="scss" scoped>
-    .wheel-content {
-        flex-grow: 1;
-    }
+  .wheel-content {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 </style>
