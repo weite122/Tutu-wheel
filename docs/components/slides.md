@@ -2,7 +2,7 @@
 title: Slides - 轮播图
 sidebarDepth: 2
 ---
-# Slides 轮播图 <Badge text="beta" type="warn"/>
+# Slides 轮播图 
 
 在有限空间内，循环播放同一类型的图片、文字等内容
 

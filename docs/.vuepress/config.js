@@ -7,7 +7,7 @@ module.exports = {
     nav: [
       {text: '主页', link: '/'},
       {text: '文档', link: '/guide/'},
-      {text: '交流', link: 'https://google.com'},
+      {text: 'github', link: 'https://github.com/weite122/Tutu-wheel'},
     ],
     sidebar: [
       {
@@ -28,6 +28,10 @@ module.exports = {
           '/components/toast',
           '/components/popover',
           '/components/slides',
+          '/components/pager',
+          '/components/cascader',
+          '/components/nav',
+
         ]
       }
     ]

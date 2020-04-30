@@ -17,7 +17,9 @@
       'g-icon': Icon
     },
     props: {
-      icon: {},
+      icon: {
+        type: String
+      },
       loading: {
         type: Boolean,
         default: false
