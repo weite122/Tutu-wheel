@@ -9,7 +9,9 @@ title: Pager - 分页
 <pager-demo-1/>
 </ClientOnly>
 
-
+```vue
+<g-pager :total-page="10" :current-page.sync="currentPage"></g-pager>
+```
 
 ## Attributes
 

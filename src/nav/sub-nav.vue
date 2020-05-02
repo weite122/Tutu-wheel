@@ -94,6 +94,7 @@
   @import "_var.scss";
   .g-sub-nav {
     position: relative;
+    z-index: 10;
     &:not(.vertical) {
       &.active {
         &::after {
@@ -101,7 +102,7 @@
           position: absolute;
           bottom: 0;
           left: 0;
-          border-bottom: 2px solid $blue;
+          border-bottom: 2px solid $light-green;
           width: 100%;
         }
       }

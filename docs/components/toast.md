@@ -6,11 +6,39 @@ title: Toast - 提示框
 
 <ClientOnly>
   <toast-demo-1></toast-demo-1>
+</ClientOnly>
+
+```vue
+<div>
+    <g-button @click="$toast('点击弹出提示')">上方弹出</g-button>
+    <g-button @click="$toast('点击弹出提示', {position:'middle'})">中间弹出</g-button>
+    <g-button @click="$toast('点击弹出提示', {position:'bottom'})">下方弹出</g-button>
+</div>
+```
+
+
+<ClientOnly>
   <toast-demo-2></toast-demo-2>
-  <toast-demo-3></toast-demo-3>
 </ClientOnly>
 
 
+
+```vue
+<div>
+    <g-button @click="onClickButton">上方弹出</g-button>
+</div>
+```
+
+
+<ClientOnly>
+  <toast-demo-3></toast-demo-3>
+</ClientOnly>
+
+```vue
+<div>
+    <g-button @click="onClickButton">上方弹出</g-button>
+</div>
+```
 ## Attributes
 
 |   参数    |            说明             |  类型  |        可选值         | 默认值 |

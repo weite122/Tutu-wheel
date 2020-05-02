@@ -17,10 +17,6 @@
             </g-footer>
         </g-layout>
 
-        <p>
-            <strong>代码</strong>
-        </p>
-        <pre><code>{{content}}</code></pre>
     </div>
 </template>
 <style scoped>
@@ -35,23 +31,6 @@
   import GContent from '../../../src/layout/content'
   import GSider from '../../../src/layout/sider'
   export default {
-    components: {GLayout, GHeader, GFooter, GContent, GSider},
-    data () {
-      return {
-        content: `
-        <g-layout style="color: white; margin-bottom:50px;">
-            <g-header style="height: 50px; background: #3eaf7c;">
-                header
-            </g-header>
-            <g-content style="height: 100px; background:#2a8a5e;">
-                content
-            </g-content>
-            <g-footer style="height: 50px; background:#3eaf7c;">
-                footer
-            </g-footer>
-        </g-layout>
-      `.replace(/^ {8}/gm, '').trim()
-      }
-    }
+    components: {GLayout, GHeader, GFooter, GContent, GSider}
   }
 </script>

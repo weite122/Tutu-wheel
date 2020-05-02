@@ -46,14 +46,14 @@
           position: absolute;
           bottom: 0;
           left: 0;
-          border-bottom: 2px solid $blue;
+          border-bottom: 2px solid $light-green;
           width: 100%;
         }
       }
     }
     &.vertical {
       &.selected {
-        color: $blue;
+        color: $light-green;
       }
     }
   }

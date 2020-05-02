@@ -10,6 +10,20 @@ sidebarDepth: 2
   <slides-demo-1></slides-demo-1>
 </ClientOnly>
 
+```vue
+<g-slides :selected.sync="selected">
+  <g-slides-item name="1">
+    <div class="box">1</div>
+  </g-slides-item>
+  <g-slides-item name="2">
+    <div class="box">2</div>
+  </g-slides-item>
+  <g-slides-item name="3">
+    <div class="box">3</div>
+  </g-slides-item>
+</g-slides>
+```
+
 ::: tip
 - 轮播图大小根据用户的box自动适配
 - 同时支持移动端的左右滑动

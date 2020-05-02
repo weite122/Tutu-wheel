@@ -5,9 +5,25 @@ title: Input - 输入框
 
 <ClientOnly>
   <input-demo-1></input-demo-1>
+</ClientOnly>
+
+```vue
+<g-input value="中文"></g-input>
+<g-input value="中文" disabled></g-input>
+<g-input value="中文" readonly></g-input>
+```
+
+
+<ClientOnly>
   <input-demo-2></input-demo-2>
 </ClientOnly>
 
+```vue
+<g-input v-model="value"></g-input>
+<div>
+    value: {{value}}
+</div>
+```
 
 ## Input Attributes
 

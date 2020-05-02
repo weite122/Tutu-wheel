@@ -7,7 +7,14 @@ title: Button - 按钮
   <button-demo-1></button-demo-1>
 </ClientOnly>
 
-
+```vue
+<g-button>默认按钮</g-button>
+<g-button icon="settings" icon-position="left">左侧按钮</g-button>
+<g-button icon="settings" icon-position="right">右侧按钮</g-button>
+<g-button icon="settings">默认按钮</g-button>
+<g-button :loading="true">默认按钮</g-button>
+<g-button disabled>默认按钮</g-button>
+```
 ## Attributes
 
 |     参数     |      说明      |  类型   |         可选值          | 默认值 |

@@ -4,7 +4,8 @@
     <p>
       <strong>预览</strong>
     </p>
-    <g-nav :selected.sync="selected">
+
+    <g-nav :selected.sync="selected" vertical>
       <g-nav-item name="home">首页</g-nav-item>
       <g-sub-nav name="about">
         <template slot="title">关于</template>
@@ -24,8 +25,8 @@
       </g-sub-nav>
       <g-nav-item name="hire">招聘</g-nav-item>
     </g-nav>
-
   </div>
+
 </template>
 <script>
   import GNav from '../../../src/nav/nav.vue'
