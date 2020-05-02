@@ -20,6 +20,7 @@
     "acorn": "^7.1.1",
     "babel-loader": "^8.0.6",
     "chai": "^4.1.2",
+    "js-yaml": "^3.13.1",
     "just-extend": "^4.0.2",
     "karma": "^3.0.0",
     "karma-chrome-launcher": "^2.2.0",
@@ -27,6 +28,7 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-spec-reporter": "^0.0.32",
     "karma-webpack": "^3.0.0",
+    "kind-of": "^6.0.3",
     "mem": "^6.0.1",
     "minimist": "^1.2.5",
     "mocha": "^5.2.0",
@@ -37,7 +39,8 @@
     "sinon": "^6.1.5",
     "sinon-chai": "^3.2.0",
     "vue-template-compiler": "^2.6.10",
-    "vuepress": "^1.2.0"
+    "vuepress": "^1.2.0",
+    "webpack-bundle-analyzer": "^3.7.0"
   },
   "postcss": {
     "plugins": {

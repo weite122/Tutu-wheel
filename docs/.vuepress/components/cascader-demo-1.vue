@@ -4,17 +4,9 @@
     <p>
       <strong>预览</strong>
     </p>
-    <g-tabs :selected="selected">
-      <g-tabs-head>
-        <g-tabs-item name="1">1</g-tabs-item>
-        <g-tabs-item name="2">2</g-tabs-item>
-      </g-tabs-head>
-      <g-tabs-body>
-        <g-tabs-pane name="1">content 1</g-tabs-pane>
-        <g-tabs-pane name="2">content 2</g-tabs-pane>
-      </g-tabs-body>
-    </g-tabs>
 
+    <g-cascader :source.sync="source" popover-height="200px"
+                :selected.sync="selected" :load-data="loadData"/>
     <p>
       <strong>代码</strong>
     </p>
@@ -22,29 +14,52 @@
   </div>
 </template>
 <script>
-  import GTabs from '../../../src/tabs/tabs'
-  import GTabsBody from '../../../src/tabs/tabs-body'
-  import GTabsHead from '../../../src/tabs/tabs-head'
-  import GTabsItem from '../../../src/tabs/tabs-item'
-  import GTabsPane from '../../../src/tabs/tabs-pane'
+  function ajax(parentId = 0) {
+    return new Promise((success, fail) => {
+      setTimeout(() => {
+        let result = db.filter((item) => item.parent_id == parentId)
+        result.forEach(node => {
+          if (db.filter(item => item.parent_id === node.id).length > 0) {
+            node.isLeaf = false
+          } else {
+            node.isLeaf = true
+          }
+        })
+        success(result)
+      }, 100)
+    })
+  }
+
+  import Button from "../../../src/button/button";
+  import Cascader from "../../../src/cascader/cascader";
+  import db from "../../../tests/fixtures/db";
+
   export default {
-    components: {GTabs, GTabsBody, GTabsHead, GTabsItem, GTabsPane},
-    data () {
+    components: {
+      "g-button": Button,
+      "g-cascader": Cascader,
+    },
+    data() {
       return {
-        selected: '1',
-        content: `
-          <g-tabs :selected="selected">
-            <g-tabs-head>
-              <g-tabs-item name="1">1</g-tabs-item>
-              <g-tabs-item name="2">2</g-tabs-item>
-            </g-tabs-head>
-            <g-tabs-body>
-              <g-tabs-pane name="1">content 1</g-tabs-pane>
-              <g-tabs-pane name="2">content 2</g-tabs-pane>
-            </g-tabs-body>
-          </g-tabs>
-      `.replace(/^ {8}/gm, '').trim()
-      }
+        selected: [],
+        source: [],
+        content: `<g-cascader :source.sync="source" popover-height="200px"
+                :selected.sync="selected" :load-data="loadData"/>`
+      };
+    },
+    created() {
+      ajax(0).then(result => {
+        console.log(result)
+        this.source = result
+      })
+    },
+    methods: {
+      loadData({id}, updateSource) {
+        ajax(id).then(result => {
+          console.log(result)
+          updateSource(result) // 回调:把别人传给我的函数调用一下
+        })
+      },
     }
   }
 </script>

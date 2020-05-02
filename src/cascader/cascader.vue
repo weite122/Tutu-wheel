@@ -1,17 +1,12 @@
 <template>
   <div class="cascader" ref="cascader" v-click-outside="close">
     <div class="trigger" @click="toggle">
-      <span>{{result || '&nbsp;'}}</span>
+      {{result || '&nbsp;'}}
     </div>
     <div class="popover-wrapper" v-if="popoverVisible">
-      <cascader-items :items="source"
-                      class="popover"
-                      :selected="selected"
-                      :height="popoverHeight"
-                      @update:selected="onUpdateSelected"
-                      :loadData="loadData"
+      <cascader-items :items="source" class="popover" :loadData="loadData"
                       :loading-item="loadingItem"
-      ></cascader-items>
+                      :height="popoverHeight" :selected="selected" @update:selected="onUpdateSelected"></cascader-items>
     </div>
   </div>
 </template>
@@ -19,9 +14,8 @@
 <script>
   import CascaderItems from './cascader-items'
   import ClickOutside from '../click-outside'
-
   export default {
-    name: "WheelCascader",
+    name: 'WheelCascader',
     components: {CascaderItems},
     directives: {ClickOutside},
     props: {
@@ -33,35 +27,35 @@
       },
       selected: {
         type: Array,
-        default: () => {
-          return []
-        }
+        default: () => {return []}
       },
       loadData: {
         type: Function
       }
     },
-    data() {
+    data () {
       return {
         popoverVisible: false,
         loadingItem: {},
       }
     },
+    updated () {
+    },
     methods: {
-      open() {
+      open () {
         this.popoverVisible = true
       },
-      close() {
+      close () {
         this.popoverVisible = false
       },
-      toggle() {
+      toggle () {
         if (this.popoverVisible === true) {
           this.close()
         } else {
           this.open()
         }
       },
-      onUpdateSelected(newSelected) {
+      onUpdateSelected (newSelected) {
         this.$emit('update:selected', newSelected)
         let lastItem = newSelected[newSelected.length - 1]
         let simplest = (children, id) => {
@@ -82,9 +76,8 @@
             return found
           } else {
             found = simplest(hasChildren, id)
-            if (found) {
-              return found
-            } else {
+            if (found) { return found }
+            else {
               for (let i = 0; i < hasChildren.length; i++) {
                 found = complex(hasChildren[i].children, id)
                 if (found) {
@@ -103,25 +96,25 @@
           this.$emit('update:source', copy)
         }
         if (!lastItem.isLeaf && this.loadData) {
-          this.loadData(lastItem, updateSource)
+          this.loadData(lastItem, updateSource) // 回调:把别人传给我的函数调用一下
+          // 调回调的时候传一个函数,这个函数理论应该被调用
           this.loadingItem = lastItem
         }
-      },
-      computed: {
-        result() {
-          return this.selected.map((item) => item.name).join('/')
-        }
+      }
+    },
+    computed: {
+      result () {
+        return this.selected.map((item) => item.name).join('/')
       }
     }
   }
 </script>
 
-<style lang="scss" scoped>
+<style scoped lang="scss">
   @import "_var.scss";
   .cascader {
-    position: relative;
     display: inline-block;
-    border: 1px solid darkred;
+    position: relative;
     .trigger {
       background: white;
       height: $input-height;
@@ -133,15 +126,9 @@
       border-radius: $border-radius;
     }
     .popover-wrapper {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background: white;
-      margin-top: 8px;
-      z-index: 1;
-      display: flex;
+      position: absolute; top: 100%; left: 0; background: white; display: flex;
+      margin-top: 8px;z-index: 1;
       @extend .box-shadow;
     }
   }
 </style>
-

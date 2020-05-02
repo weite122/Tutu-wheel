@@ -1,27 +1,24 @@
 ---
-title: Tabs - 标签
+title: Cascader - 级联
 ---
-# 标签
+
+# Cascader 级联组件 
+
+当一个数据集合有清晰的层级结构时，可通过级联选择器逐级查看并选择。
+
+
 
 <ClientOnly>
-  <tabs-demo-1></tabs-demo-1>
+<cascader-demo-1 />
 </ClientOnly>
 
-## Tabs Attributes
 
-|   参数   |   说明   |  类型  | 可选值 | 默认值 |
-| :------: | :------: | :----: | :----: | :----: |
-| selected | 选中的值 | String |   —    |   —    |
 
-## TabsPane Attributes
+## Attributes
 
-| 参数 |  说明  |  类型  | 可选值 | 默认值 |
-| :--: | :----: | :----: | :----: | :----: |
-| name | 标识符 | String |   —    |   —    |
-
-## TabsItem Attributes
-
-|   参数   |   说明   |  类型   |   可选值   | 默认值 |
-| :------: | :------: | :-----: | :--------: | :----: |
-|   name   |  标识符  | String  |     —      |   —    |
-| disabled | 是否禁用 | Boolean | true/false | false  |
+|      参数      |      说明      |   类型   | 可选值 | 默认值 |
+| :------------: | :------------: | :------: | :----: | :----: |
+|     source     |     数据源     |  Array   |   —    |   —    |
+|    selected    |  选中项绑定值  |  Array   |   —    |   —    |
+| popover-height | 设置弹出层高度 |  String  |   —    | 200px  |
+|   load-data    |    异步函数    | Function |   —    |   —    |

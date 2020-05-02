@@ -4,14 +4,13 @@
       <g-cascader :source.sync="source" popover-height="200px"
                   :selected.sync="selected" :load-data="loadData"></g-cascader>
     </div>
-    {{selected.map(item=> item.name)}}
+
   </div>
 </template>
 <script>
   import Button from "./button/button";
   import Cascader from "./cascader/cascader";
   import db from "../tests/fixtures/db";
-  import Popover from './popover'
   function ajax (parentId = 0) {
     return new Promise((success, fail) => {
       setTimeout(() => {
@@ -32,7 +31,6 @@
     components: {
       "g-button": Button,
       "g-cascader": Cascader,
-      "g-popover": Popover
     },
     data () {
       return {

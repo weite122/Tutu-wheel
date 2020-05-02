@@ -1,5 +1,5 @@
 <template>
-  <div class="cascaderItem" :style="{height:height}">
+  <div class="cascaderItem" :style="{height: height}">
     <div class="left">
       <div class="label" v-for="item in items" @click="onClickLabel(item)">
         <span class="name">{{item.name}}</span>
@@ -14,22 +14,16 @@
       </div>
     </div>
     <div class="right" v-if="rightItems">
-      <wheel-cascader-items
-        :items="rightItems"
-        :heigth="height"
-        :level="level+1"
-        :loading-item="loadingItem"
-        :load-data="loadData"
-        :selected="selected"
-        @update:selected="onUpdateSelected"
-      ></wheel-cascader-items>
+      <wheel-cascader-items ref="right" :items="rightItems" :height="height"
+                           :loading-item="loadingItem"
+                           :load-data="loadData"
+                           :level="level+1" :selected="selected" @update:selected="onUpdateSelected"></wheel-cascader-items>
     </div>
   </div>
 </template>
 
 <script>
   import Icon from '../icon'
-
   export default {
     name: "WheelCascaderItems",
     components: {Icon},
@@ -56,30 +50,29 @@
         default: 0
       }
     },
-    update() {
-      // console.log(JSON.stringify(this.items))
-    },
     computed: {
-      rightItems() {
+      rightItems () {
         if (this.selected[this.level]) {
           let selected = this.items.filter((item) => item.name === this.selected[this.level].name)
           if (selected && selected[0].children && selected[0].children.length > 0) {
             return selected[0].children
           }
         }
-      }
+      },
+    },
+    mounted () {
     },
     methods: {
-      rightArrowVisible(item) {
-        return this.loadData ? !this.isLeaf : item.children
+      rightArrowVisible (item) {
+        return this.loadData ? !item.isLeaf : item.children
       },
-      onClickLabel(item) {
+      onClickLabel (item) {
         let copy = JSON.parse(JSON.stringify(this.selected))
         copy[this.level] = item
-        copy.splice(this.level + 1)
+        copy.splice(this.level + 1) // 一句话
         this.$emit('update:selected', copy)
       },
-      onUpdateSelected(newSelected) {
+      onUpdateSelected (newSelected) {
         this.$emit('update:selected', newSelected)
       }
     }
@@ -89,9 +82,11 @@
 <style scoped lang="scss">
   @import "_var.scss";
   .cascaderItem {
+    z-index: 10;
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
+    height: 100px;
     .left {
       height: 100%;
       padding: .3em 0;
@@ -100,13 +95,12 @@
     .right {
       height: 100%;
       border-left: 1px solid $border-color-light;
-      overflow: auto;
     }
     .label {
       padding: .5em 1em;
       display: flex;
-      cursor: pointer;
       align-items: center;
+      cursor: pointer;
       white-space: nowrap;
       &:hover {
         background: $grey;
@@ -126,5 +120,4 @@
       }
     }
   }
-
 </style>
