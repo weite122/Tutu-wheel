@@ -1,3 +1,3 @@
-# Tutu UI 官网
+# Tutu-wheel UI 官网
 
-Tutu UI 是一个好用 UI 框架,提供了 ... 等常用组件,适合移动端和 PC 端使用.
+Tutu-wheel UI 是一套基于 Vue.js 的高质量 UI 组件库,提供了`button`,`slides`,`grid`,`tab`,`popover`,`toast`等常用组件,适合PC 端使用.
