@@ -7,11 +7,11 @@ title: 安装
 
 
 ```bash
-npm install Tutu-wheel@1.0.1 --save
+npm install tutu-wheel@0.0.4 --save
 ```
 
 或
 
 ```bash
-yarn add Tutu-wheel@1.0.1 --save
+yarn add tutu-wheel@0.0.4 --save
 ```
