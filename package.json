@@ -1,7 +1,7 @@
 {
   "name": "tutu-wheel",
   "version": "0.0.4",
-  "main":"dist/gulu.umd.min.js",
+  "main": "dist/gulu.umd.min.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --target lib --name wheel src/index.js",
