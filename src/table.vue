@@ -3,7 +3,7 @@
     <table class="wheel-table" :class="{bordered, compact, striped}">
       <thead>
       <tr>
-        <th><input type="checkbox" @change="onChangeAllItems"></th>
+        <th><input type="checkbox" @change="onChangeAllItems" ref="allChecked"></th>
         <th v-if="numberVisible">#</th>
         <th v-for="column in columns">{{ column.text }}</th>
       </tr>
@@ -57,6 +57,17 @@ export default {
     striped: {
       type: Boolean,
       default: true
+    }
+  },
+  watch: {
+    selectedItems() {
+      if (this.selectedItems.length === this.dataSource.length) {
+        this.$refs.allChecked.indeterminate = false
+      } else if (this.selectedItems.length === 0) {
+        this.$refs.allChecked.indeterminate = false
+      } else {
+        this.$refs.allChecked.indeterminate = true
+      }
     }
   },
   methods: {
