@@ -3,7 +3,7 @@
     <table class="wheel-table" :class="{bordered, compact, striped}">
       <thead>
       <tr>
-        <th><input type="checkbox" @change="onChangeAllItems" ref="allChecked"></th>
+        <th><input type="checkbox" @change="onChangeAllItems" ref="allChecked" :checked="areAllItemSelected"></th>
         <th v-if="numberVisible">#</th>
         <th v-for="column in columns" :key="column.field">{{ column.text }}</th>
       </tr>
@@ -68,6 +68,21 @@ export default {
       } else {
         this.$refs.allChecked.indeterminate = true
       }
+    }
+  },
+  computed: {
+    areAllItemSelected() {
+      const a = this.dataSource.map(item => item.id).sort()
+      const b = this.selectedItems.map(item => item.id).sort()
+      let equal = true
+      if (a.length !== b.length) {
+        return false
+      }
+      for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) {
+        equal = false
+        break
+      }
+      return equal
     }
   },
   methods: {
