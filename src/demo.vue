@@ -2,7 +2,7 @@
   <div>
     {{ selected }}
     <div style="padding: 20px;">
-      <g-table :columns="columns" :data-source="dataSource" bordered @changeItem="x"></g-table>
+      <g-table :columns="columns" :data-source="dataSource" bordered :selected-items.sync="selected"></g-table>
     </div>
     <div style="padding: 20px;">
       <g-table :columns="columns" :data-source="dataSource" bordered compact :striped="false"></g-table>
@@ -37,18 +37,7 @@ export default {
     }
   },
   methods: {
-    x(object) {
-      let {selected, item, index} = object
-      if (selected) {
-        this.selected.push(item)
-      } else {
-        let index = this.selected.indexOf(item)
-        this.selected.splice(index, 1)
-      }
-      // console.log('selected',selected);
-      // console.log('item',item);
-      // console.log('index',index);
-    }
+
   }
 };
 </script>
