@@ -1,68 +1,67 @@
 <template>
   <div>
+    {{ selected }}
     <div style="padding: 20px;">
-      <g-cascader :source.sync="source" popover-height="200px"
-                  :selected.sync="selected" :load-data="loadData"></g-cascader>
+      <g-table :columns="columns" :data-source="dataSource" bordered @changeItem="x"></g-table>
     </div>
-
+    <div style="padding: 20px;">
+      <g-table :columns="columns" :data-source="dataSource" bordered compact :striped="false"></g-table>
+    </div>
   </div>
 </template>
 <script>
-  import Button from "./button/button";
-  import Cascader from "./cascader/cascader";
-  import db from "../tests/fixtures/db";
-  function ajax (parentId = 0) {
-    return new Promise((success, fail) => {
-      setTimeout(() => {
-        let result = db.filter((item) => item.parent_id == parentId)
-        result.forEach(node => {
-          if (db.filter(item => item.parent_id === node.id).length > 0) {
-            node.isLeaf = false
-          }else{
-            node.isLeaf = true
-          }
-        })
-        success(result)
-      }, 1000)
-    })
-  }
-  export default {
-    name: "demo",
-    components: {
-      "g-button": Button,
-      "g-cascader": Cascader,
-    },
-    data () {
-      return {
-        selected: [],
-        source: []
-      };
-    },
-    created () {
-      ajax(0).then(result => {
-        console.log(result)
-        this.source = result
-      })
-    },
-    destroyed () {
-    },
-    methods: {
-      loadData ({id}, updateSource) {
-        ajax(id).then(result => {
-          console.log(result)
-          updateSource(result) // 回调:把别人传给我的函数调用一下
-        })
-      },
+import GTable from './table'
+
+export default {
+  name: "demo",
+  components: {
+    GTable
+  },
+  data() {
+    return {
+      selected: [],
+      columns: [
+        {text: '姓名', field: 'name'},
+        {text: '分数', field: 'score'},
+      ],
+      dataSource: [
+        {id: 1, name: '小红', score: 100},
+        {id: 2, name: '小明', score: 60},
+        {id: 3, name: '小强', score: 80},
+        {id: 4, name: '张三', score: 90},
+        {id: 5, name: '李四', score: 80},
+        {id: 6, name: '王五', score: 80},
+        {id: 7, name: '蜘蛛侠', score: 70},
+        {id: 8, name: '蝙蝠侠', score: 80},
+      ]
     }
-  };
+  },
+  methods: {
+    x(object) {
+      let {selected, item, index} = object
+      if (selected) {
+        this.selected.push(item)
+      } else {
+        let index = this.selected.indexOf(item)
+        this.selected.splice(index, 1)
+      }
+      // console.log('selected',selected);
+      // console.log('item',item);
+      // console.log('index',index);
+    }
+  }
+};
 </script>
 <style>
-  * {margin: 0; padding: 0; box-sizing: border-box;}
-  img {max-width: 100%;}
-  html {
-    --font-size: 14px;
-  }
-  body {
-    font-size: var(--font-size);
-  }
+* {margin: 0; padding: 0; box-sizing: border-box;}
+
+img {max-width: 100%;}
+
+html {
+  --font-size: 14px;
+}
+
+body {
+  font-size: var(--font-size);
+}
 </style>
