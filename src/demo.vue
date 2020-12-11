@@ -2,7 +2,10 @@
   <div>
     {{ selected }}
     <div style="padding: 20px;">
-      <g-table :columns="columns" :data-source="dataSource" bordered :selected-items.sync="selected"></g-table>
+      <g-table :columns="columns" :data-source="dataSource" bordered :selected-items.sync="selected"
+               :order-by.sync="orderBy"
+               @update:orderBy="x(orderBy)"
+      ></g-table>
     </div>
     <div style="padding: 20px;">
       <g-table :columns="columns" :data-source="dataSource" bordered compact :striped="false"></g-table>
@@ -24,6 +27,10 @@ export default {
         {text: '姓名', field: 'name'},
         {text: '分数', field: 'score'},
       ],
+      orderBy: {
+        name: 'asc',
+        score: 'desc'
+      },
       dataSource: [
         {id: 1, name: '小红', score: 100},
         {id: 2, name: '小明', score: 60},
@@ -37,7 +44,10 @@ export default {
     }
   },
   methods: {
-
+    x(orderBy) {
+      console.log(orderBy)
+      this.dataSource = this.dataSource.sort((a, b) => a.score - b.score)
+    }
   }
 };
 </script>

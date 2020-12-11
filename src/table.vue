@@ -5,7 +5,16 @@
       <tr>
         <th><input type="checkbox" @change="onChangeAllItems" ref="allChecked" :checked="areAllItemSelected"></th>
         <th v-if="numberVisible">#</th>
-        <th v-for="column in columns" :key="column.field">{{ column.text }}</th>
+        <th v-for="column in columns" :key="column.field">
+          <div class="wheel-table-header">
+            {{ column.text }}
+            <span v-if="column.field in orderBy" class="wheel-table-sorter"
+                  @click="changeOrderBy(column.field)">
+              <g-icon name="asc" :class="{active: orderBy[column.field] === 'asc'}"></g-icon>
+              <g-icon name="desc" :class="{active: orderBy[column.field] === 'desc'}"></g-icon>
+            </span>
+          </div>
+        </th>
       </tr>
       </thead>
       <tbody>
@@ -24,9 +33,18 @@
 </template>
 
 <script>
+import GIcon from './icon'
+
 export default {
   name: "WheelTable",
+  components: {
+    GIcon
+  },
   props: {
+    orderBy: {
+      type: Object,
+      default: () => ({}),
+    },
     columns: {
       type: Array,
       required: true
@@ -102,6 +120,18 @@ export default {
     },
     inSelectedItems(item) {
       return this.selectedItems.filter(i => i.id === item.id).length > 0
+    },
+    changeOrderBy(key) {
+      const copy = JSON.parse(JSON.stringify(this.orderBy))
+      let oldValue = copy[key]
+      if (oldValue === 'asc') {
+        copy[key] = 'desc'
+      } else if (oldValue === 'desc') {
+        copy[key] = true
+      } else {
+        copy[key] = 'asc'
+      }
+      this.$emit('update:orderBy', copy)
     }
   }
 }
@@ -137,6 +167,31 @@ $grey: darken($grey, 10%);
         }
       }
     }
+  }
+  &-sorter {
+    display: inline-flex;
+    flex-direction: column;
+    margin: 0 4px;
+    svg {
+      width: 9px;
+      height: 9px;
+      fill: $grey;
+      &.active {
+        fill: darken($grey, 50%)
+      }
+      &:first-child {
+        position: relative;
+        bottom: -1px;
+      }
+      &:nth-child(2) {
+        position: relative;
+        top: -1px;
+      }
+    }
+  }
+  &-header {
+    display: flex;
+    align-items: center;
   }
   td, th {
     border-bottom: 1px solid $grey;
