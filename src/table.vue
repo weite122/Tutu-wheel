@@ -29,6 +29,9 @@
       </tr>
       </tbody>
     </table>
+    <div v-if="loading" class="wheel-table-loading">
+      <g-icon name="loading"/>
+    </div>
   </div>
 </template>
 
@@ -44,6 +47,10 @@ export default {
     orderBy: {
       type: Object,
       default: () => ({}),
+    },
+    loading: {
+      type: Boolean,
+      default: false
     },
     columns: {
       type: Array,
@@ -192,6 +199,26 @@ $grey: darken($grey, 10%);
   &-header {
     display: flex;
     align-items: center;
+  }
+  &-wrapper {
+    position: relative;
+  }
+  &-loading {
+    background: rgba(255, 255, 255, 0.8);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    svg {
+      width: 50px;
+      height: 50px;
+      fill: #817f7f;
+      @include spin;
+    }
   }
   td, th {
     border-bottom: 1px solid $grey;

@@ -4,7 +4,8 @@
     <div style="padding: 20px;">
       <g-table :columns="columns" :data-source="dataSource" bordered :selected-items.sync="selected"
                :order-by.sync="orderBy"
-               @update:orderBy="x(orderBy)"
+               @update:orderBy="x"
+               :loading="loading"
       ></g-table>
     </div>
     <div style="padding: 20px;">
@@ -23,6 +24,7 @@ export default {
   data() {
     return {
       selected: [],
+      loading: false,
       columns: [
         {text: '姓名', field: 'name'},
         {text: '分数', field: 'score'},
@@ -44,9 +46,12 @@ export default {
     }
   },
   methods: {
-    x(orderBy) {
-      console.log(orderBy)
-      this.dataSource = this.dataSource.sort((a, b) => a.score - b.score)
+    x() {
+      this.loading = true
+      setTimeout(() => {
+        this.dataSource = this.dataSource.sort((a, b) => a.score - b.score)
+        this.loading = false
+      }, 500)
     }
   }
 };
