@@ -6,6 +6,7 @@
                :order-by.sync="orderBy"
                @update:orderBy="x"
                :loading="loading"
+               height="400px"
       ></g-table>
     </div>
     <div style="padding: 20px;">
@@ -42,6 +43,18 @@ export default {
         {id: 6, name: '王五', score: 80},
         {id: 7, name: '蜘蛛侠', score: 70},
         {id: 8, name: '蝙蝠侠', score: 80},
+        {id: 9, name: '小红', score: 100},
+        {id: 10, name: '小明', score: 60},
+        {id: 11, name: '小强', score: 80},
+        {id: 12, name: '张三', score: 90},
+        {id: 13, name: '李四', score: 80},
+        {id: 14, name: '王五', score: 80},
+        {id: 15, name: '蜘蛛侠', score: 70},
+        {id: 16, name: '超人', score: 80},
+        {id: 17, name: '李四', score: 80},
+        {id: 18, name: '王五', score: 80},
+        {id: 19, name: '蜘蛛侠', score: 70},
+        {id: 20, name: '蝙蝠侠', score: 80},
       ]
     }
   },
