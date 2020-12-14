@@ -1,12 +1,11 @@
 <template>
   <div>
-    {{ selected }}
     <div style="padding: 20px;">
       <g-table :columns="columns" :data-source="dataSource" bordered :selected-items.sync="selected"
                :order-by.sync="orderBy"
                @update:orderBy="x"
                :loading="loading"
-               height="400px"
+               :height="400"
       ></g-table>
     </div>
     <div style="padding: 20px;">
@@ -27,7 +26,7 @@ export default {
       selected: [],
       loading: false,
       columns: [
-        {text: '姓名', field: 'name'},
+        {text: '姓名', field: 'name', width: 100},
         {text: '分数', field: 'score'},
       ],
       orderBy: {

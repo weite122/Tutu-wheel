@@ -1,12 +1,14 @@
 <template>
   <div class="wheel-table-wrapper" ref="wrapper">
-    <div :style="{height, overflow: 'auto'} ">
+    <div :style="{height, overflow: 'auto'}" ref="tableWrapper">
       <table class="wheel-table" :class="{bordered, compact, striped}" ref="table">
         <thead>
         <tr>
-          <th><input type="checkbox" @change="onChangeAllItems" ref="allChecked" :checked="areAllItemSelected"></th>
-          <th v-if="numberVisible">#</th>
-          <th v-for="column in columns" :key="column.field">
+          <th :style="{width:'50px'}">
+            <input type="checkbox" @change="onChangeAllItems" ref="allChecked"
+                   :checked="areAllItemSelected"></th>
+          <th :style="{width: '50px'}" v-if="numberVisible">#</th>
+          <th :style="{width: column.width + 'px'}" v-for="column in columns" :key="column.field">
             <div class="wheel-table-header">
               {{ column.text }}
               <span v-if="column.field in orderBy" class="wheel-table-sorter"
@@ -20,12 +22,13 @@
         </thead>
         <tbody>
         <tr v-for="(item,index) in dataSource" :key="item.id">
-          <td><input type="checkbox" @change="onChangeItem(item,index,$event)"
-                     :checked="inSelectedItems(item)"
-          ></td>
-          <td v-if="numberVisible">{{ index + 1 }}</td>
+          <td :style="{width: '50px'}">
+            <input type="checkbox" @change="onChangeItem(item,index,$event)"
+                   :checked="inSelectedItems(item)"
+            ></td>
+          <td :style="{width: '50px'}" v-if="numberVisible">{{ index + 1 }}</td>
           <template v-for="column in columns">
-            <td :key="item.field">{{ item[column.field] }}</td>
+            <td :style="{width: column.width + 'px'}" :key="item.field">{{ item[column.field] }}</td>
           </template>
         </tr>
         </tbody>
@@ -48,7 +51,7 @@ export default {
   },
   props: {
     height: {
-      type: [Number, String]
+      type: Number
     },
     orderBy: {
       type: Object,
@@ -91,13 +94,15 @@ export default {
     }
   },
   mounted() {
-    let table2 = this.$refs.table.cloneNode(true)
+    let table2 = this.$refs.table.cloneNode(false)
     this.table2 = table2
     table2.classList.add('wheel-table-copy')
+    let thead = this.$refs.table.children[0]
+    let {height} = thead.getBoundingClientRect()
+    this.$refs.tableWrapper.style.marginTop = height + 'px'
+    this.$refs.tableWrapper.style.height = this.height - height + 'px'
+    table2.appendChild(this.$refs.table.children[0])
     this.$refs.wrapper.appendChild(table2)
-    this.updateHeadersWidth()
-    this.onWindowResize = () => this.updateHeadersWidth()
-    window.addEventListener('resize', this.onWindowResize)
   },
   beforeDestroy() {
     this.table2.remove()
@@ -126,22 +131,6 @@ export default {
     }
   },
   methods: {
-    updateHeadersWidth() {
-      let table2 = this.table2
-      let tableHeader = Array.from(this.$refs.table.children).filter(node => node.tagName.toLowerCase() === 'thead')[0]
-      let tableHeader2
-      Array.from(table2.children).map(node => {
-        if (node.tagName.toLowerCase() !== 'thead') {
-          node.remove()
-        } else {
-          tableHeader2 = node
-        }
-      })
-      Array.from(tableHeader.children[0].children).map((th, i) => {
-        const {width} = th.getBoundingClientRect()
-        tableHeader2.children[0].children[i].style.width = width + 'px'
-      })
-    },
     onChangeItem(item, index, e) {
       let selected = e.target.checked
       let copy = JSON.parse(JSON.stringify(this.selectedItems))
