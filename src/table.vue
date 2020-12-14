@@ -19,6 +19,7 @@
             </span>
             </div>
           </th>
+          <th></th>
         </tr>
         </thead>
         <tbody>
@@ -35,6 +36,9 @@
             <template v-for="column in columns">
               <td :style="{width: column.width + 'px'}" :key="item.field">{{ item[column.field] }}</td>
             </template>
+            <td>
+              <slot :item="item"></slot>
+            </td>
           </tr>
           <tr v-if="inExpandedIds(item.id)" :key="`${item.id}-expand`">
             <td :colspan="columns.length + expandedCellColspan">
@@ -67,7 +71,7 @@ export default {
     }
   },
   props: {
-    checkable:{
+    checkable: {
       type: Boolean,
       default: false
     },
@@ -140,10 +144,14 @@ export default {
     }
   },
   computed: {
-    expandedCellColspan(){
+    expandedCellColspan() {
       let result = 0
-      if(this.checkable){result+=1}
-      if(this.expandField){result+=1}
+      if (this.checkable) {
+        result += 1
+      }
+      if (this.expandField) {
+        result += 1
+      }
       return result
     },
     areAllItemSelected() {

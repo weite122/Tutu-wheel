@@ -8,7 +8,12 @@
                :height="400"
                expand-field="description"
                checkable
-      ></g-table>
+      >
+        <template slot-scope="xxx">
+          <button @click="edit(xxx.item)">编辑</button>
+          <button @click="view(xxx.item)">查看</button>
+        </template>
+      </g-table>
     </div>
     <div style="padding: 20px;">
       <g-table :columns="columns" :data-source="dataSource" bordered compact :striped="false"></g-table>
@@ -29,7 +34,7 @@ export default {
       loading: false,
       columns: [
         {text: '姓名', field: 'name', width: 100},
-        {text: '分数', field: 'score'},
+        {text: '分数', field: 'score', width: 700},
       ],
       orderBy: {
         name: 'asc',
@@ -60,6 +65,12 @@ export default {
     }
   },
   methods: {
+    edit(item) {
+      alert(`开始编辑${item.id}`)
+    },
+    view(item) {
+      alert(`开始查看${item.id}`)
+    },
     x() {
       this.loading = true
       setTimeout(() => {
