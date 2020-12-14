@@ -7,6 +7,7 @@
                :loading="loading"
                :height="400"
                expand-field="description"
+               checkable
       ></g-table>
     </div>
     <div style="padding: 20px;">

@@ -4,8 +4,8 @@
       <table class="wheel-table" :class="{bordered, compact, striped}" ref="table">
         <thead>
         <tr>
-          <th :style="{width:'50px'}" class="wheel-table-center"></th>
-          <th :style="{width:'50px'}" class="wheel-table-center">
+          <th v-if="expandField" :style="{width:'50px'}" class="wheel-table-center"></th>
+          <th v-if="checkable" :style="{width:'50px'}" class="wheel-table-center">
             <input type="checkbox" @change="onChangeAllItems" ref="allChecked"
                    :checked="areAllItemSelected"></th>
           <th :style="{width: '50px'}" v-if="numberVisible">#</th>
@@ -24,10 +24,10 @@
         <tbody>
         <template v-for="(item,index) in dataSource">
           <tr :key="item.id">
-            <td :style="{width: '50px'}" class="wheel-table-center">
+            <td v-if="expandField" :style="{width: '50px'}" class="wheel-table-center">
               <g-icon @click="expandItem(item.id)" class="wheel-table-expandIcon" name="right"/>
             </td>
-            <td :style="{width: '50px'}" class="wheel-table-center">
+            <td v-if="checkable" :style="{width: '50px'}" class="wheel-table-center">
               <input type="checkbox" @change="onChangeItem(item,index,$event)"
                      :checked="inSelectedItems(item)"
               ></td>
@@ -37,7 +37,7 @@
             </template>
           </tr>
           <tr v-if="inExpandedIds(item.id)" :key="`${item.id}-expand`">
-            <td :colspan="columns.length + 2">
+            <td :colspan="columns.length + expandedCellColspan">
               {{ item[expandField] || '空' }}
             </td>
           </tr>
@@ -67,6 +67,10 @@ export default {
     }
   },
   props: {
+    checkable:{
+      type: Boolean,
+      default: false
+    },
     expandField: {
       type: String
     },
@@ -136,6 +140,12 @@ export default {
     }
   },
   computed: {
+    expandedCellColspan(){
+      let result = 0
+      if(this.checkable){result+=1}
+      if(this.expandField){result+=1}
+      return result
+    },
     areAllItemSelected() {
       const a = this.dataSource.map(item => item.id).sort()
       const b = this.selectedItems.map(item => item.id).sort()
