@@ -6,6 +6,7 @@
                @update:orderBy="x"
                :loading="loading"
                :height="400"
+               expand-field="description"
       ></g-table>
     </div>
     <div style="padding: 20px;">
@@ -34,8 +35,8 @@ export default {
         score: 'desc'
       },
       dataSource: [
-        {id: 1, name: '小红', score: 100},
-        {id: 2, name: '小明', score: 60},
+        {id: 1, name: '小红', score: 100, description: 'xxxxxxxxx xxxxxxxxxxx'},
+        {id: 2, name: '小明', score: 60, description: 'xxxx xxxxxxxxxxx'},
         {id: 3, name: '小强', score: 80},
         {id: 4, name: '张三', score: 90},
         {id: 5, name: '李四', score: 80},

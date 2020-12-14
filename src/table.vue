@@ -4,7 +4,8 @@
       <table class="wheel-table" :class="{bordered, compact, striped}" ref="table">
         <thead>
         <tr>
-          <th :style="{width:'50px'}">
+          <th :style="{width:'50px'}" class="wheel-table-center"></th>
+          <th :style="{width:'50px'}" class="wheel-table-center">
             <input type="checkbox" @change="onChangeAllItems" ref="allChecked"
                    :checked="areAllItemSelected"></th>
           <th :style="{width: '50px'}" v-if="numberVisible">#</th>
@@ -21,16 +22,27 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-for="(item,index) in dataSource" :key="item.id">
-          <td :style="{width: '50px'}">
-            <input type="checkbox" @change="onChangeItem(item,index,$event)"
-                   :checked="inSelectedItems(item)"
-            ></td>
-          <td :style="{width: '50px'}" v-if="numberVisible">{{ index + 1 }}</td>
-          <template v-for="column in columns">
-            <td :style="{width: column.width + 'px'}" :key="item.field">{{ item[column.field] }}</td>
-          </template>
-        </tr>
+        <template v-for="(item,index) in dataSource">
+          <tr :key="item.id">
+            <td :style="{width: '50px'}" class="wheel-table-center">
+              <g-icon @click="expandItem(item.id)" class="wheel-table-expandIcon" name="right"/>
+            </td>
+            <td :style="{width: '50px'}" class="wheel-table-center">
+              <input type="checkbox" @change="onChangeItem(item,index,$event)"
+                     :checked="inSelectedItems(item)"
+              ></td>
+            <td :style="{width: '50px'}" v-if="numberVisible">{{ index + 1 }}</td>
+            <template v-for="column in columns">
+              <td :style="{width: column.width + 'px'}" :key="item.field">{{ item[column.field] }}</td>
+            </template>
+          </tr>
+          <tr v-if="inExpandedIds(item.id)" :key="`${item.id}-expand`">
+            <td :colspan="columns.length + 2">
+              {{ item[expandField] || '空' }}
+            </td>
+          </tr>
+        </template>
+
         </tbody>
       </table>
     </div>
@@ -49,7 +61,15 @@ export default {
   components: {
     GIcon
   },
+  data() {
+    return {
+      expandIds: []
+    }
+  },
   props: {
+    expandField: {
+      type: String
+    },
     height: {
       type: Number
     },
@@ -131,6 +151,17 @@ export default {
     }
   },
   methods: {
+    inExpandedIds(id) {
+      return this.expandIds.indexOf(id) >= 0
+    },
+    expandItem(id) {
+      if (this.inExpandedIds(id)) {
+        this.expandIds.splice(this.expandIds.indexOf(id), 1)
+      } else {
+        this.expandIds.push(id)
+      }
+
+    },
     onChangeItem(item, index, e) {
       let selected = e.target.checked
       let copy = JSON.parse(JSON.stringify(this.selectedItems))
@@ -252,6 +283,13 @@ $grey: darken($grey, 10%);
     left: 0;
     width: 100%;
     background: white;
+  }
+  &-expandIcon {
+    width: 10px;
+    height: 10px;
+  }
+  & &-center {
+    text-align: center;
   }
 }
 </style>
