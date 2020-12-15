@@ -34,7 +34,7 @@ export default {
       loading: false,
       columns: [
         {text: '姓名', field: 'name', width: 100},
-        {text: '分数', field: 'score', width: 700},
+        {text: '分数', field: 'score'},
       ],
       orderBy: {
         name: 'asc',
