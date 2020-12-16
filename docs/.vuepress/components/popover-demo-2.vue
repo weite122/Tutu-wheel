@@ -38,7 +38,7 @@
 </style>
 <script>
   import GButton from '../../../src/button/button'
-  import GPopover from '../../../src/popover'
+  import GPopover from '@/popover/popover'
   export default {
     components: {GButton, GPopover},
     methods: {

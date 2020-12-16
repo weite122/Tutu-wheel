@@ -11,7 +11,7 @@
 </template>
 
 <script>
-  import GPager from '../../../src/pager'
+  import GPager from '@/pager/pager'
 
   export default {
     components: {GPager},

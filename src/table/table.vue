@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import GIcon from './icon'
+import GIcon from '../icon'
 
 export default {
   name: "WheelTable",
@@ -237,7 +237,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "_var.scss";
+@import "var";
 $grey: darken($grey, 10%);
 .wheel-table {
   width: 100%;

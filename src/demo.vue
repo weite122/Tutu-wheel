@@ -1,84 +1,171 @@
 <template>
   <div>
-    <div style="padding: 20px;">
-      <g-table :columns="columns" :data-source="dataSource" bordered :selected-items.sync="selected"
-               :order-by.sync="orderBy"
-               @update:orderBy="x"
-               :loading="loading"
-               :height="400"
-               expand-field="description"
-               checkable
-      >
-        <template slot-scope="xxx">
-          <button @click="edit(xxx.item)">编辑</button>
-          <button @click="view(xxx.item)">查看</button>
-        </template>
-      </g-table>
-    </div>
-    <div style="padding: 20px;">
-      <g-table :columns="columns" :data-source="dataSource" bordered compact :striped="false"></g-table>
-    </div>
+    <p>段落1</p>
+    <p>段落2</p>
+    <p>段落3</p>
+    <p>段落4</p>
+    <p>段落5</p>
+    <p>段落6</p>
+    <p>段落7</p>
+    <p>段落8</p>
+    <p>段落9</p>
+    <p>段落10</p>
+    <p>段落11</p>
+    <p>段落12</p>
+    <p>段落13</p>
+    <p>段落14</p>
+    <p>段落15</p>
+    <p>段落16</p>
+    <p>段落17</p>
+    <p>段落18</p>
+    <p>段落19</p>
+    <p>段落20</p>
+    <p>段落21</p>
+    <p>段落22</p>
+    <p>段落23</p>
+    <p>段落24</p>
+    <p>段落25</p>
+    <p>段落26</p>
+    <p>段落27</p>
+    <p>段落28</p>
+    <p>段落29</p>
+    <p>段落30</p>
+    <p>段落31</p>
+    <p>段落32</p>
+    <p>段落33</p>
+    <p>段落34</p>
+    <p>段落35</p>
+    <p>段落36</p>
+    <p>段落37</p>
+    <p>段落38</p>
+    <p>段落39</p>
+    <p>段落40</p>
+    <p>段落41</p>
+    <p>段落42</p>
+    <p>段落43</p>
+    <p>段落44</p>
+    <p>段落45</p>
+    <p>段落46</p>
+    <p>段落47</p>
+    <p>段落48</p>
+    <p>段落49</p>
+    <p>段落50</p>
+    <g-sticky distance="100">
+      <div style="border: 1px solid #333">我是粘纸内容</div>
+    </g-sticky>
+    <p>段落1</p>
+    <p>段落2</p>
+    <p>段落3</p>
+    <p>段落4</p>
+    <p>段落5</p>
+    <p>段落6</p>
+    <p>段落7</p>
+    <p>段落8</p>
+    <p>段落9</p>
+    <p>段落10</p>
+    <p>段落11</p>
+    <p>段落12</p>
+    <p>段落13</p>
+    <p>段落14</p>
+    <p>段落15</p>
+    <p>段落16</p>
+    <p>段落17</p>
+    <p>段落18</p>
+    <p>段落19</p>
+    <p>段落20</p>
+    <p>段落21</p>
+    <p>段落22</p>
+    <p>段落23</p>
+    <p>段落24</p>
+    <p>段落25</p>
+    <p>段落26</p>
+    <p>段落27</p>
+    <p>段落28</p>
+    <p>段落29</p>
+    <p>段落30</p>
+    <p>段落31</p>
+    <p>段落32</p>
+    <p>段落33</p>
+    <p>段落34</p>
+    <p>段落35</p>
+    <p>段落36</p>
+    <p>段落37</p>
+    <p>段落38</p>
+    <p>段落39</p>
+    <p>段落40</p>
+    <p>段落41</p>
+    <p>段落42</p>
+    <p>段落43</p>
+    <p>段落44</p>
+    <p>段落45</p>
+    <p>段落46</p>
+    <p>段落47</p>
+    <p>段落48</p>
+    <p>段落49</p>
+    <p>段落50</p>
+    <p>段落51</p>
+    <p>段落52</p>
+    <p>段落53</p>
+    <p>段落54</p>
+    <p>段落55</p>
+    <p>段落56</p>
+    <p>段落57</p>
+    <p>段落58</p>
+    <p>段落59</p>
+    <p>段落60</p>
+    <p>段落61</p>
+    <p>段落62</p>
+    <p>段落63</p>
+    <p>段落64</p>
+    <p>段落65</p>
+    <p>段落66</p>
+    <p>段落67</p>
+    <p>段落68</p>
+    <p>段落69</p>
+    <p>段落70</p>
+    <p>段落71</p>
+    <p>段落72</p>
+    <p>段落73</p>
+    <p>段落74</p>
+    <p>段落75</p>
+    <p>段落76</p>
+    <p>段落77</p>
+    <p>段落78</p>
+    <p>段落79</p>
+    <p>段落80</p>
+    <p>段落81</p>
+    <p>段落82</p>
+    <p>段落83</p>
+    <p>段落84</p>
+    <p>段落85</p>
+    <p>段落86</p>
+    <p>段落87</p>
+    <p>段落88</p>
+    <p>段落89</p>
+    <p>段落90</p>
+    <p>段落91</p>
+    <p>段落92</p>
+    <p>段落93</p>
+    <p>段落94</p>
+    <p>段落95</p>
+    <p>段落96</p>
+    <p>段落97</p>
+    <p>段落98</p>
+    <p>段落99</p>
+    <p>段落100</p>
   </div>
 </template>
 <script>
-import GTable from './table'
+
+import GSticky from './sticky/sticky'
 
 export default {
   name: "demo",
   components: {
-    GTable
+    GSticky
   },
-  data() {
-    return {
-      selected: [],
-      loading: false,
-      columns: [
-        {text: '姓名', field: 'name', width: 100},
-        {text: '分数', field: 'score'},
-      ],
-      orderBy: {
-        name: 'asc',
-        score: 'desc'
-      },
-      dataSource: [
-        {id: 1, name: '小红', score: 100, description: 'xxxxxxxxx xxxxxxxxxxx'},
-        {id: 2, name: '小明', score: 60, description: 'xxxx xxxxxxxxxxx'},
-        {id: 3, name: '小强', score: 80},
-        {id: 4, name: '张三', score: 90},
-        {id: 5, name: '李四', score: 80},
-        {id: 6, name: '王五', score: 80},
-        {id: 7, name: '蜘蛛侠', score: 70},
-        {id: 8, name: '蝙蝠侠', score: 80},
-        {id: 9, name: '小红', score: 100},
-        {id: 10, name: '小明', score: 60},
-        {id: 11, name: '小强', score: 80},
-        {id: 12, name: '张三', score: 90},
-        {id: 13, name: '李四', score: 80},
-        {id: 14, name: '王五', score: 80},
-        {id: 15, name: '蜘蛛侠', score: 70},
-        {id: 16, name: '超人', score: 80},
-        {id: 17, name: '李四', score: 80},
-        {id: 18, name: '王五', score: 80},
-        {id: 19, name: '蜘蛛侠', score: 70},
-        {id: 20, name: '蝙蝠侠', score: 80},
-      ]
-    }
-  },
-  methods: {
-    edit(item) {
-      alert(`开始编辑${item.id}`)
-    },
-    view(item) {
-      alert(`开始查看${item.id}`)
-    },
-    x() {
-      this.loading = true
-      setTimeout(() => {
-        this.dataSource = this.dataSource.sort((a, b) => a.score - b.score)
-        this.loading = false
-      }, 500)
-    }
-  }
+
+
 };
 </script>
 <style>

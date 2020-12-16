@@ -24,7 +24,7 @@
     }
 </style>
 <script>
-  import plugin from '../../../src/plugin'
+  import plugin from '@/util/plugin'
   import GButton from '../../../src/button/button'
   import Vue from 'vue'
   Vue.use(plugin)

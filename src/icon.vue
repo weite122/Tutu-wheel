@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import './svg'
+import './util/svg'
 
 export default {
   name: 'WheelIcon',

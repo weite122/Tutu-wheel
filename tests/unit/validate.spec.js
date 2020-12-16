@@ -4,7 +4,7 @@ import sinonChai from 'sinon-chai'
 
 chai.use(sinonChai)
 
-import Validator from '../../src/validate'
+import Validator from '@/util/validate'
 
 describe('Validator', () => {
   it('存在', () => {

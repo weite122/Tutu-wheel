@@ -23,7 +23,7 @@
 </template>
 
 <script>
-  import GIcon from './icon'
+  import GIcon from '../icon'
 
   export default {
     name: "WheelPager",
@@ -77,7 +77,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import "_var.scss";
+  @import "var";
   .wheel-pager { display: flex; justify-content: flex-start; align-items: center; user-select: none;
     $width: 20px; $height: 20px; $font-size: 12px;
     &.hide { display: none; }
