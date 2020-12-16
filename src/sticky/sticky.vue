@@ -12,9 +12,10 @@ export default {
       sticky: false
     }
   },
-  created() {
+  mounted() {
+    let top = this.getTop()
     window.addEventListener('scroll', () => {
-      if (window.scrollY > this.top()) {
+      if (window.scrollY > top) {
         console.log('滚过了元素的顶部')
         this.sticky = true
       } else {
@@ -31,7 +32,7 @@ export default {
     }
   },
   methods: {
-    top() {
+    getTop() {
       let {top} = this.$refs.wrapper.getBoundingClientRect()
       return top + window.scrollY
     }
