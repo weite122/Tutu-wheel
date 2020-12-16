@@ -1,6 +1,8 @@
 <template>
-  <div class="wheel-sticky" ref="wrapper" :class="classes">
-    <slot></slot>
+  <div class="wheel-sticky-wrapper" ref="wrapper" :style="{height}">
+    <div class="wheel-sticky" :class="classes" :style="{left, width}">
+      <slot></slot>
+    </div>
   </div>
 </template>
 
@@ -9,18 +11,25 @@ export default {
   name: 'WheelSticky',
   data() {
     return {
-      sticky: false
+      sticky: false,
+      left: undefined,
+      width: undefined,
+      height: undefined,
     }
   },
   mounted() {
     let top = this.getTop()
     window.addEventListener('scroll', () => {
       if (window.scrollY > top) {
-        console.log('滚过了元素的顶部')
+        let {height, width, left} = this.$refs.wrapper.getBoundingClientRect()
+        this.height = height + 'px'
+        this.left = left + 'px'
+        this.width = width + 'px'
         this.sticky = true
       } else {
         console.log('没滚过元素顶部')
         this.sticky = false
+
       }
     })
   },
@@ -46,8 +55,6 @@ export default {
     background: #2a8a5e;
     position: fixed;
     top: 0;
-    left: 0;
-    width: 100%;
   }
 }
 </style>
