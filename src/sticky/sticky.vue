@@ -1,6 +1,6 @@
 <template>
   <div class="wheel-sticky-wrapper" ref="wrapper" :style="{height}">
-    <div class="wheel-sticky" :class="classes" :style="{left, width}">
+    <div class="wheel-sticky" :class="classes" :style="{left, width, top}">
       <slot></slot>
     </div>
   </div>
@@ -9,17 +9,23 @@
 <script>
 export default {
   name: 'WheelSticky',
+  props: {
+    distance: {
+      type: Number,
+      default: 0
+    }
+  },
   data() {
     return {
       sticky: false,
       left: undefined,
       width: undefined,
       height: undefined,
+      top: undefined,
     }
   },
   mounted() {
-    let top = this.getTop()
-    this.windowScrollHandler = this._windowScrollHandler.bind(this, top)
+    this.windowScrollHandler = this._windowScrollHandler.bind(this)
     window.addEventListener('scroll', this.windowScrollHandler)
   },
   beforeDestroy() {
@@ -37,14 +43,20 @@ export default {
       let {top} = this.$refs.wrapper.getBoundingClientRect()
       return top + window.scrollY
     },
-    _windowScrollHandler(top) {
-      if (window.scrollY > top) {
+    _windowScrollHandler() {
+      let top = this.getTop()
+      if (window.scrollY > top - this.distance) {
         let {height, width, left} = this.$refs.wrapper.getBoundingClientRect()
         this.height = height + 'px'
         this.left = left + 'px'
         this.width = width + 'px'
+        this.top = this.distance + 'px'
         this.sticky = true
       } else {
+        this.height = undefined
+        this.left = undefined
+        this.width = undefined
+        this.top = undefined
         this.sticky = false
       }
     }
@@ -55,9 +67,7 @@ export default {
 <style scoped lang="scss">
 .wheel-sticky {
   &.sticky {
-    background: #2a8a5e;
     position: fixed;
-    top: 0;
   }
 }
 </style>
