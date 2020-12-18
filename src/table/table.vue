@@ -34,7 +34,14 @@
               ></td>
             <td :style="{width: '50px'}" v-if="numberVisible">{{ index + 1 }}</td>
             <template v-for="column in columns">
-              <td :style="{width: column.width + 'px'}" :key="item.field">{{ item[column.field] }}</td>
+              <td :style="{width: column.width + 'px'}" :key="column.field">
+                <template v-if="column.render">
+                  <vnodes :vnodes="column.render({value: item[column.field]})"></vnodes>
+                </template>
+                <template v-else>
+                  {{ item[column.field] }}
+                </template>
+              </td>
             </template>
             <td v-if="$scopedSlots.default">
               <div ref="actions" style="display: inline-block;">
@@ -65,11 +72,16 @@ import GIcon from '../icon'
 export default {
   name: "WheelTable",
   components: {
-    GIcon
+    GIcon,
+    vnodes: {
+      functional: true,
+      render: (h, context) => context.props.vnodes
+    }
   },
   data() {
     return {
-      expandIds: []
+      expandIds: [],
+      columns: []
     }
   },
   props: {
@@ -90,10 +102,6 @@ export default {
     loading: {
       type: Boolean,
       default: false
-    },
-    columns: {
-      type: Array,
-      required: true
     },
     selectedItems: {
       type: Array,
@@ -124,6 +132,14 @@ export default {
     }
   },
   mounted() {
+    this.columns = this.$slots.default.map(node => {
+      let {text, field, width} = node.componentOptions.propsData
+      let render = node.data.scopedSlots && node.data.scopedSlots.default
+      return {text, field, width, render}
+    })
+    let result = this.columns[0].render({value: '维特'})
+    console.log(result)
+
     let table2 = this.$refs.table.cloneNode(false)
     this.table2 = table2
     table2.classList.add('wheel-table-copy')
