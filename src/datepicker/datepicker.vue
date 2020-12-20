@@ -13,8 +13,14 @@
           <div class="wheel-date-picker-nav"></div>
           <div class="wheel-date-picker-panels">
             <div v-if="mode==='year'" class="wheel-date-picker-content">年</div>
-            <div v-else-if="mode='month'" class="wheel-date-picker-content">月</div>
-            <div v-else class="wheel-date-picker-content">日</div>
+            <div v-else-if="mode==='month'" class="wheel-date-picker-content">月</div>
+            <div v-else class="wheel-date-picker-content">
+              <div v-for="i in helper.range(1,7)">
+                <span v-for="j in helper.range(1,8)">
+                  {{ visibleDays[(i - 1) * 7 + j - 1].getDate() }}
+                </span>
+              </div>
+            </div>
           </div>
           <div class="wheel-date-picker-actions"></div>
         </div>
@@ -40,19 +46,11 @@ export default {
   data() {
     return {
       mode: 'days',
-      value: new Date()
+      value: new Date(),
+      helper: helper
     }
   },
   mounted() {
-    let date = this.value
-    let first = helper.firstDayOfMonth(date)
-    let last = helper.lastDayOfMonth(date)
-    let array = []
-    let [year, month, day] = helper.getYearMonthDay(date)
-    for (let i = first.getDate(); i <= last.getDate(); i++) {
-      array.push(new Date(year, month, i))
-    }
-    console.log(array)
   },
   methods: {
     onClickYears() {
@@ -64,6 +62,27 @@ export default {
   },
   computed: {
     visibleDays() {
+      let date = this.value
+      let first = helper.firstDayOfMonth(date)
+      let last = helper.lastDayOfMonth(date)
+      let array = []
+      let [year, month, day] = helper.getYearMonthDate(date)
+      for (let i = first.getDate(); i <= last.getDate(); i++) {
+        array.push(new Date(year, month, i))
+      }
+      let n = first.getDay() === 0 ? 6 : first.getDay() - 1
+      let array2 = []
+      for (let i = 0; i < n; i++) {
+        array2.push(new Date(year, month, -i))
+      }
+      array2 = array2.reverse()
+      let m = 42 - array.length - array2.length
+      let array3 = []
+      for (let i = 1; i <= m; i++) {
+        array3.push(new Date(year, month + 1, i))
+      }
+
+      return [...array2, ...array, ...array3]
 
     }
   }
