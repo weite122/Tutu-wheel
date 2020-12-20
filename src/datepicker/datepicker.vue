@@ -15,14 +15,19 @@
             <div v-if="mode==='year'" class="wheel-date-picker-content">年</div>
             <div v-else-if="mode==='month'" class="wheel-date-picker-content">月</div>
             <div v-else class="wheel-date-picker-content">
-              <div v-for="i in helper.range(1,7)">
-                <span v-for="j in helper.range(1,8)">
+              <div :class="c('weekdays')">
+                <span v-for="i in helper.range(0,7)">{{ weekdays[i] }}</span>
+              </div>
+              <div :class="c('row')" v-for="i in helper.range(1,7)">
+                <span :class="c('col')" v-for="j in helper.range(1,8)">
                   {{ visibleDays[(i - 1) * 7 + j - 1].getDate() }}
                 </span>
               </div>
             </div>
           </div>
-          <div class="wheel-date-picker-actions"></div>
+          <div class="wheel-date-picker-actions">
+            <button>清除</button>
+          </div>
         </div>
       </template>
     </g-popover>
@@ -47,7 +52,8 @@ export default {
     return {
       mode: 'days',
       value: new Date(),
-      helper: helper
+      helper: helper,
+      weekdays: ['一', '二', '三', '四', '五', '六', '日']
     }
   },
   mounted() {
@@ -58,6 +64,9 @@ export default {
     },
     onClickMonths() {
       this.mode = 'month'
+    },
+    c(className) {
+      return `wheel-date-picker-${className}`
     }
   },
   computed: {
