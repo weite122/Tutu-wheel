@@ -1,7 +1,7 @@
 <template>
     <div class="popover" ref="popover">
-        <div ref="contentWrapper" class="content-wrapper" v-if="visible"
-             :class="{[`position-${position}`]:true}">
+        <div ref="contentWrapper" class="wheel-popover-content-wrapper" v-if="visible"
+             :class="[{[`position-${position}`]:true}, popClassName]">
             <slot name="content" :close="close"></slot>
         </div>
         <span ref="triggerWrapper" style="display: inline-block;">
@@ -14,6 +14,12 @@
   export default {
     name: "WheelPopover",
     props: {
+      popClassName:{
+        type: String
+      },
+      container:{
+        type: Element
+      },
       position: {
         type: String,
         default: 'top',
@@ -81,8 +87,8 @@
         popover.appendChild(contentWrapper)
       },
       positionContent() {
-        const {contentWrapper, triggerWrapper} = this.$refs
-        document.body.appendChild(contentWrapper)
+        const {contentWrapper, triggerWrapper} = this.$refs;
+        (this.container || document.body).appendChild(contentWrapper)
         let {width, height, top, left} = triggerWrapper.getBoundingClientRect()
         let {height: height2} = contentWrapper.getBoundingClientRect()
         let positions = {
@@ -140,7 +146,7 @@
         position: relative;
     }
 
-    .content-wrapper {
+    .wheel-popover-content-wrapper {
         position: absolute;
         border: 1px solid $border-color;
         border-radius: $border-radius;

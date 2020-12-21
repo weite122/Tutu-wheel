@@ -1,16 +1,17 @@
 <template>
-  <div style="border: 1px solid #66CC99">
-    <g-popover position="bottom">
+  <div class="wheel-date-picker" style="border: 1px solid #66CC99" ref="wrapper">
+    <g-popover position="bottom" :container="x">
       <g-input type="text"/>
       <template slot="content">
         <div class="wheel-date-picker-pop">
-          <span><g-icon name="settings"></g-icon></span>
-          <span><g-icon name="settings"></g-icon></span>
-          <span @click="onClickYears">2020年</span>
-          <span @click="onClickMonths">8月</span>
-          <span><g-icon name="settings"></g-icon></span>
-          <span><g-icon name="settings"></g-icon></span>
-          <div class="wheel-date-picker-nav"></div>
+          <div class="wheel-date-picker-nav">
+            <span><g-icon name="leftleft"/></span>
+            <span><g-icon name="left"/></span>
+            <span @click="onClickYears">2020年</span>
+            <span @click="onClickMonths">12月</span>
+            <span><g-icon name="right"/></span>
+            <span><g-icon name="rightright"/></span>
+          </div>
           <div class="wheel-date-picker-panels">
             <div v-if="mode==='year'" class="wheel-date-picker-content">年</div>
             <div v-else-if="mode==='month'" class="wheel-date-picker-content">月</div>
@@ -53,10 +54,12 @@ export default {
       mode: 'days',
       value: new Date(),
       helper: helper,
+      x: null,
       weekdays: ['一', '二', '三', '四', '五', '六', '日']
     }
   },
   mounted() {
+    this.x = this.$refs.wrapper
   },
   methods: {
     onClickYears() {
@@ -99,5 +102,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.wheel-date-picker {
+  &-nav {
+    background: #2a8a5e;
+  }
+  /deep/ .wheel-popover-content-wrapper {
+    padding: 0;
+  }
+}
 </style>
