@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <g-date-picker></g-date-picker>
+    <g-date-picker :value="d" @input="d=$event"></g-date-picker>
     <div>其他内容</div>
   </div>
 
@@ -14,7 +14,9 @@ export default {
     GDatePicker
   },
   data() {
-    return {}
+    return {
+      d: new Date()
+    }
   },
   methods: {}
 }

@@ -1,16 +1,18 @@
 <template>
   <div class="wheel-date-picker" style="border: 1px solid #66CC99" ref="wrapper">
     <g-popover position="bottom" :container="popoverContainer">
-      <g-input type="text"/>
+      <g-input type="text" :value="formattedValue"/>
       <template slot="content">
         <div class="wheel-date-picker-pop">
           <div class="wheel-date-picker-nav">
-            <span :class="c(prevYear)"><g-icon name="leftleft"/></span>
-            <span :class="c(prevMonth)"><g-icon name="left"/></span>
-            <span @click="onClickYears">2020年</span>
-            <span @click="onClickMonths">12月</span>
-            <span :class="nextMonth"><g-icon name="right"/></span>
-            <span :class="nextYear"><g-icon name="rightright"/></span>
+            <span :class="c('prevYear','navItem')"><g-icon name="leftleft"/></span>
+            <span :class="c('prevMonth','navItem')"><g-icon name="left"/></span>
+            <span :class="c('yearAndMonth')">
+              <span @click="onClickYears">2020年</span>
+              <span @click="onClickMonths">12月</span>
+            </span>
+            <span :class="c('nextMonth','navItem')"><g-icon name="right"/></span>
+            <span :class="c('nextYear','navItem')"><g-icon name="rightright"/></span>
           </div>
           <div class="wheel-date-picker-panels">
             <div v-if="mode==='year'" class="wheel-date-picker-content">年</div>
@@ -20,8 +22,9 @@
                 <span :class="c('weekday')" v-for="i in helper.range(0,7)" :key="i">{{ weekdays[i] }}</span>
               </div>
               <div :class="c('row')" v-for="i in helper.range(1,7)" :key=i>
-                <span :class="c('cell')" v-for="j in helper.range(1,8)" :key="j">
-                  {{ visibleDays[(i - 1) * 7 + j - 1].getDate() }}
+                <span @click="onClickCell(getVisibleDay(i,j))" :class="c('cell')"
+                      v-for="j in helper.range(1,8)" :key="j">
+                  {{ getVisibleDay(i, j).getDate() }}
                 </span>
               </div>
             </div>
@@ -49,10 +52,19 @@ export default {
     GIcon,
     GPopover
   },
+  props: {
+    firstDayOfWeek: {
+      type: Number,
+      default: 1
+    },
+    value: {
+      type: Date,
+      default: () => new Date()
+    }
+  },
   data() {
     return {
       mode: 'days',
-      value: new Date(),
       helper: helper,
       popoverContainer: null,
       weekdays: ['一', '二', '三', '四', '五', '六', '日']
@@ -62,14 +74,20 @@ export default {
     this.popoverContainer = this.$refs.wrapper
   },
   methods: {
+    onClickCell(date) {
+      this.$emit('input', date)
+    },
+    getVisibleDay(row, col) {
+      return this.visibleDays[(row - 1) * 7 + col - 1]
+    },
     onClickYears() {
       this.mode = 'year'
     },
     onClickMonths() {
       this.mode = 'month'
     },
-    c(className) {
-      return `wheel-date-picker-${className}`
+    c(...classNames) {
+      return classNames.map(className => `wheel-date-picker-${className}`)
     }
   },
   computed: {
@@ -85,6 +103,10 @@ export default {
         array.push(new Date(x + i * 3600 * 24 * 1000))
       }
       return array
+    },
+    formattedValue() {
+      const [year, month, day] = helper.getYearMonthDate(this.value)
+      return `${year}-${month + 1}-${day}`
     }
   }
 }
@@ -93,9 +115,12 @@ export default {
 <style lang="scss" scoped>
 .wheel-date-picker {
   &-nav {
-    background: #2a8a5e;
+    display: flex;
   }
-  &-cell, &-weekday{
+  &-yearAndMonth {
+    margin: auto;
+  }
+  &-cell, &-weekday, &-navItem {
     width: 32px;
     height: 32px;
     //border: 1px solid #2a8a5e;
