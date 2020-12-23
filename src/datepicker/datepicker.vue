@@ -22,7 +22,8 @@
                 <span :class="c('weekday')" v-for="i in helper.range(0,7)" :key="i">{{ weekdays[i] }}</span>
               </div>
               <div :class="c('row')" v-for="i in helper.range(1,7)" :key=i>
-                <span @click="onClickCell(getVisibleDay(i,j))" :class="c('cell')"
+                <span @click="onClickCell(getVisibleDay(i,j))"
+                      :class="[c('cell'),{currentMonth:isCurrentMonth(getVisibleDay(i, j))}]"
                       v-for="j in helper.range(1,8)" :key="j">
                   {{ getVisibleDay(i, j).getDate() }}
                 </span>
@@ -74,8 +75,15 @@ export default {
     this.popoverContainer = this.$refs.wrapper
   },
   methods: {
+    isCurrentMonth(date) {
+      let [year1, month1] = helper.getYearMonthDate(date)
+      let [year2, month2] = helper.getYearMonthDate(this.value)
+      return year1 === year2 && month1 === month2
+    },
     onClickCell(date) {
-      this.$emit('input', date)
+      if(this.isCurrentMonth(date)){
+        this.$emit('input', date)
+      }
     },
     getVisibleDay(row, col) {
       return this.visibleDays[(row - 1) * 7 + col - 1]
@@ -127,6 +135,12 @@ export default {
     display: inline-flex;
     justify-content: center;
     align-items: center;
+  }
+  &-cell{
+    color: #ddd;
+    &.currentMonth{
+      color: black;
+    }
   }
   /deep/ .wheel-popover-content-wrapper {
     padding: 0;
