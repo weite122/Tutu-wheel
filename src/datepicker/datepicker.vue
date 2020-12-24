@@ -5,14 +5,14 @@
       <template slot="content">
         <div class="wheel-date-picker-pop">
           <div class="wheel-date-picker-nav">
-            <span :class="c('prevYear','navItem')"><g-icon name="leftleft"/></span>
-            <span :class="c('prevMonth','navItem')"><g-icon name="left"/></span>
+            <span @click="onClickPrevYear" :class="c('prevYear','navItem')"><g-icon name="leftleft"/></span>
+            <span @click="onClickPrevMonth" :class="c('prevMonth','navItem')"><g-icon name="left"/></span>
             <span :class="c('yearAndMonth')">
-              <span @click="onClickYears">2020年</span>
-              <span @click="onClickMonths">12月</span>
+              <span @click="onClickYears">{{ display.year }}年</span>
+              <span @click="onClickMonths">{{ display.month + 1 }}月</span>
             </span>
-            <span :class="c('nextMonth','navItem')"><g-icon name="right"/></span>
-            <span :class="c('nextYear','navItem')"><g-icon name="rightright"/></span>
+            <span @click="onClickNextMonth" :class="c('nextMonth','navItem')"><g-icon name="right"/></span>
+            <span @click="onClickNextYear" :class="c('nextYear','navItem')"><g-icon name="rightright"/></span>
           </div>
           <div class="wheel-date-picker-panels">
             <div v-if="mode==='year'" class="wheel-date-picker-content">年</div>
@@ -64,11 +64,13 @@ export default {
     }
   },
   data() {
+    let [year, month] = helper.getYearMonthDate(this.value);
     return {
       mode: 'days',
       helper: helper,
       popoverContainer: null,
-      weekdays: ['一', '二', '三', '四', '五', '六', '日']
+      weekdays: ['一', '二', '三', '四', '五', '六', '日'],
+      display: {year, month}
     }
   },
   mounted() {
@@ -77,11 +79,10 @@ export default {
   methods: {
     isCurrentMonth(date) {
       let [year1, month1] = helper.getYearMonthDate(date)
-      let [year2, month2] = helper.getYearMonthDate(this.value)
-      return year1 === year2 && month1 === month2
+      return year1 === this.display.year && month1 === this.display.month
     },
     onClickCell(date) {
-      if(this.isCurrentMonth(date)){
+      if (this.isCurrentMonth(date)) {
         this.$emit('input', date)
       }
     },
@@ -96,11 +97,35 @@ export default {
     },
     c(...classNames) {
       return classNames.map(className => `wheel-date-picker-${className}`)
-    }
+    },
+    onClickPrevYear() {
+      const oldDate = new Date(this.display.year, this.display.month)
+      const newDate = helper.addYear(oldDate, -1)
+      const [year, month] = helper.getYearMonthDate(newDate)
+      this.display = {year, month}
+    },
+    onClickPrevMonth() {
+      const oldDate = new Date(this.display.year, this.display.month)
+      const newDate = helper.addMonth(oldDate, -1)
+      const [year, month] = helper.getYearMonthDate(newDate)
+      this.display = {year, month}
+    },
+    onClickNextYear() {
+      const oldDate = new Date(this.display.year, this.display.month)
+      const newDate = helper.addYear(oldDate, 1)
+      const [year, month] = helper.getYearMonthDate(newDate)
+      this.display = {year, month}
+    },
+    onClickNextMonth() {
+      const oldDate = new Date(this.display.year, this.display.month)
+      const newDate = helper.addMonth(oldDate, 1)
+      const [year, month] = helper.getYearMonthDate(newDate)
+      this.display = {year, month}
+    },
   },
   computed: {
     visibleDays() {
-      let date = this.value
+      let date = new Date(this.display.year, this.display.month, 1)
       let first = helper.firstDayOfMonth(date)
       let last = helper.lastDayOfMonth(date)
       let array = []
@@ -136,9 +161,9 @@ export default {
     justify-content: center;
     align-items: center;
   }
-  &-cell{
+  &-cell {
     color: #ddd;
-    &.currentMonth{
+    &.currentMonth {
       color: black;
     }
   }
