@@ -1,6 +1,6 @@
 <template>
   <div class="wheel-scroll-wrapper" ref="parent" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
-    <div ref="child" class="wheel-scroll">
+    <div ref="child" class="wheel-scroll" :style="{transform: `translateY(${this.contentY}px)`}">
       <slot></slot>
     </div>
     <div class="wheel-scroll-track" v-show="scrollBarVisible">
@@ -21,8 +21,11 @@ export default {
       isScrolling: false,
       startPosition: undefined,
       endPosition: undefined,
-      translateX: 0,
-      translateY: 0
+      scrollBarY: 0,
+      contentY: 0,
+      barHeight: undefined,
+      parentHeight: undefined,
+      childHeight: undefined
     }
   },
   mounted() {
@@ -34,9 +37,10 @@ export default {
     })
     const parent = this.$refs.parent
     const child = this.$refs.child
-    let translateY = 0
     let {height: childHeight} = child.getBoundingClientRect()
     let {height: parentHeight} = parent.getBoundingClientRect()
+    this.parentHeight = parentHeight
+    this.childHeight = childHeight
     let {borderTopWidth, borderBottomWidth, paddingTop, paddingBottom} = window.getComputedStyle(parent)
     borderTopWidth = parseInt(borderTopWidth)
     borderBottomWidth = parseInt(borderBottomWidth)
@@ -46,32 +50,34 @@ export default {
 
     parent.addEventListener('wheel', (e) => {
       if (e.deltaY > 20) {
-        translateY -= 20 * 3
+        this.contentY -= 20 * 3
       } else if (e.deltaY < 20) {
-        translateY -= -20 * 3
+        this.contentY -= -20 * 3
       } else {
-        translateY -= e.deltaY * 3
+        this.contentY -= e.deltaY * 3
       }
 
-      if (translateY > 0) {
-        translateY = 0
-      } else if (translateY < -maxHeight) {
-        translateY = -maxHeight
+      if (this.contentY > 0) {
+        this.contentY = 0
+      } else if (this.contentY < -maxHeight) {
+        this.contentY = -maxHeight
       } else {
         e.preventDefault()//防止抖动
       }
-      child.style.transform = `translateY(${translateY}px)`
-      this.updateScrollBar(parentHeight, childHeight, translateY)
+      // child.style.transform = `translateY(${this.contentY}px)`
+      this.updateScrollBar(parentHeight, childHeight, this.contentY)
     })
-    this.updateScrollBar(parentHeight, childHeight, translateY)
+    this.updateScrollBar(parentHeight, childHeight, this.contentY)
   },
   methods: {
     updateScrollBar(parentHeight, childHeight, translateY) {
       let barHeight = parentHeight * parentHeight / childHeight
+      this.barHeight = barHeight
       let bar = this.$refs.bar
       bar.style.height = barHeight + 'px'
       let y = parentHeight * translateY / childHeight
       bar.style.transform = `translateY(${-y}px)`
+      this.scrollBarY = -y
     },
     onMouseEnter() {
       this.scrollBarVisible = true
@@ -90,12 +96,18 @@ export default {
         return
       }
       let {screenX, screenY} = e
+      let maxScrollHeight = this.parentHeight - this.barHeight
       this.endPosition = {x: screenX, y: screenY}
       let delta = {x: this.endPosition.x - this.startPosition.x, y: this.endPosition.y - this.startPosition.y}
-      this.translateX = parseInt(this.translateX) + delta.x
-      this.translateY = parseInt(this.translateY) + delta.y
+      this.scrollBarY = parseInt(this.scrollBarY) + delta.y
+      if (this.scrollBarY < 0) {
+        this.scrollBarY = 0
+      } else if (this.scrollBarY > maxScrollHeight) {
+        this.scrollBarY = maxScrollHeight
+      }
+      this.contentY = -(this.childHeight * this.scrollBarY / this.parentHeight)
       this.startPosition = this.endPosition
-      this.$refs.bar.style.transform = `translate(0px,${this.translateY}px)`
+      this.$refs.bar.style.transform = `translate(0px,${this.scrollBarY}px)`
     },
     onMouseUpScrollBar(e) {
       this.isScrolling = false
