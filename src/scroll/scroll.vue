@@ -1,5 +1,6 @@
 <template>
-  <div class="wheel-scroll-wrapper" ref="parent" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave" @wheel="onWheel">
+  <div class="wheel-scroll-wrapper" ref="parent" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave" @wheel="onWheel"
+       @mousemove="onMouseMove">
     <div ref="child" class="wheel-scroll" :style="{transform: `translateY(${this.contentY}px)`}">
       <slot></slot>
     </div>
@@ -25,7 +26,8 @@ export default {
       contentY: 0,
       barHeight: undefined,
       parentHeight: undefined,
-      childHeight: undefined
+      childHeight: undefined,
+      mouseIn: false
     }
   },
   mounted() {
@@ -59,7 +61,7 @@ export default {
       this.updateContentY(e.deltaY, () => e.preventDefault())
       this.updateScrollBar()
     },
-    updateContentY (deltaY, fn) {
+    updateContentY(deltaY, fn) {
       let maxHeight = this.calculateContentYMax()
       this.contentY = this.calculateContentYFromDeltaY(deltaY)
       if (this.contentY > 0) {
@@ -89,10 +91,14 @@ export default {
     },
     onMouseEnter() {
       this.scrollBarVisible = true
+      this.mouseIn = true
     },
     onMouseLeave() {
-      this.scrollBarVisible = false
-      this.isScrolling = false
+      if (!this.isScrolling) this.scrollBarVisible = false
+      this.mouseIn = false
+    },
+    onMouseMove() {
+      this.mouseIn = true
     },
     onMouseDownScrollBar(e) {
       this.isScrolling = true
@@ -121,6 +127,9 @@ export default {
     },
     onMouseUpScrollBar(e) {
       this.isScrolling = false
+      if (!this.mouseIn) {
+        this.scrollBarVisible = false
+      }
     },
     onSelectScrollBar(e) {
       e.preventDefault()
