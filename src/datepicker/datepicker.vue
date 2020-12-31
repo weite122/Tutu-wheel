@@ -18,13 +18,21 @@
             <div class="wheel-date-picker-content">
               <template v-if="mode==='month'">
                 <div :class="c('selectMonth')">
-                  选择年和月
+                  <select @change="onSelectYear" :value="display.year">
+                    <option v-for="year in years" :value="year" :key="year">{{ year }}</option>
+                  </select>年
+                  <select @change="onSelectMonth" :value="display.month">
+                    <option v-for="month in helper.range(0,12)" :key="month" :value="month">{{ month + 1 }}</option>
+                  </select>
                 </div>
-
               </template>
               <template v-else>
                 <div :class="c('weekdays')">
-                  <span :class="c('weekday')" v-for="i in helper.range(0,7)" :key="i">{{ weekdays[i] }}</span>
+                  <span :class="c('weekday')"
+                        v-for="i in helper.range(0,7)"
+                        :key="i">
+                    {{ weekdays[i] }}
+                  </span>
                 </div>
                 <div :class="c('row')" v-for="i in helper.range(1,7)" :key=i>
                 <span @click="onClickCell(getVisibleDay(i,j))"
@@ -51,13 +59,15 @@ import GInput from '../input'
 import GIcon from '../icon'
 import GPopover from '../popover/popover'
 import helper from '../util/helper.js'
+import GScroll from '../scroll/scroll'
 
 export default {
   name: "WheelDatePicker",
   components: {
     GInput,
     GIcon,
-    GPopover
+    GPopover,
+    GScroll
   },
   props: {
     firstDayOfWeek: {
@@ -67,6 +77,10 @@ export default {
     value: {
       type: Date,
       default: () => new Date()
+    },
+    scope: {
+      type: Array,
+      default: () => [new Date(1900, 0, 1), helper.addYear(new Date(), 100)]
     }
   },
   data() {
@@ -130,6 +144,26 @@ export default {
       const [year, month] = helper.getYearMonthDate(newDate)
       this.display = {year, month}
     },
+    onSelectYear(e) {
+      const year = e.target.value - 0
+      const d = new Date(year, this.display.month)
+      if (d >= this.scope[0] && d <= this.scope[1]) {
+        this.display.year = year
+      } else {
+        alert('no')
+        e.target.value = this.display.year
+      }
+    },
+    onSelectMonth(e) {
+      const month = e.target.value - 0
+      const d = new Date(this.display.year, month)
+      if (d >= this.scope[0] && d <= this.scope[1]) {
+        this.display.month = month
+      } else {
+        alert('no')
+        e.target.value = this.display.month
+      }
+    }
   },
   computed: {
     visibleDays() {
@@ -148,7 +182,10 @@ export default {
     formattedValue() {
       const [year, month, day] = helper.getYearMonthDate(this.value)
       return `${year}-${month + 1}-${day}`
-    }
+    },
+    years() {
+      return helper.range(this.scope[0].getFullYear(), this.scope[1].getFullYear() + 1)
+    },
   }
 }
 </script>
@@ -175,9 +212,12 @@ export default {
       color: black;
     }
   }
-  &-selectMonth{
+  &-selectMonth {
     width: 224px;
     height: 224px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   /deep/ .wheel-popover-content-wrapper {
     padding: 0;
