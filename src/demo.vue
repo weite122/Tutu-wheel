@@ -16,7 +16,7 @@ export default {
   data() {
     return {
       d: new Date(2020,8),
-      scope: [new Date(1960, 1), new Date(2020, 8)]
+      scope: [new Date(1960, 1), new Date(2120, 8)]
     }
   },
   methods: {}
