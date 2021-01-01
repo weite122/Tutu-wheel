@@ -1,6 +1,6 @@
 <template>
-  <div class="wheel-date-picker" style="border: 1px solid #66CC99" ref="wrapper">
-    <g-popover ref="popover" position="bottom" :container="popoverContainer">
+  <div class="wheel-date-picker" ref="wrapper">
+    <g-popover ref="popover" position="bottom" :container="popoverContainer" @open="onOpen">
       <g-input type="text" :value="formattedValue"/>
       <template slot="content">
         <div class="wheel-date-picker-pop">
@@ -108,6 +108,9 @@ export default {
     this.popoverContainer = this.$refs.wrapper
   },
   methods: {
+    onOpen() {
+      this.mode = 'day'
+    },
     isCurrentMonth(date) {
       let [year1, month1] = helper.getYearMonthDate(date)
       return year1 === this.display.year && month1 === this.display.month
@@ -128,6 +131,7 @@ export default {
     onClickCell(date) {
       if (this.isCurrentMonth(date)) {
         this.$emit('input', date)
+        this.$refs.popover.close()
       }
     },
     getVisibleDay(row, col) {
@@ -218,7 +222,7 @@ export default {
         return ''
       }
       const [year, month, day] = helper.getYearMonthDate(this.value)
-      return `${year}-${month + 1}-${day}`
+      return `${year}-${helper.pad2(month + 1)}-${helper.pad2(day)}`
     },
     years() {
       return helper.range(this.scope[0].getFullYear(), this.scope[1].getFullYear() + 1)
