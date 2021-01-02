@@ -1,7 +1,6 @@
 <template>
   <div class="page">
     <g-date-picker :value="d" @input="d=$event" :scope="scope"></g-date-picker>
-    <div>其他内容</div>
   </div>
 
 </template>

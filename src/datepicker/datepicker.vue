@@ -1,7 +1,7 @@
 <template>
   <div class="wheel-date-picker" ref="wrapper">
     <g-popover ref="popover" position="bottom" :container="popoverContainer" @open="onOpen">
-      <g-input type="text" :value="formattedValue"/>
+      <g-input type="text" :value="formattedValue" @input="onInput" @change="onChange" ref="input" />
       <template slot="content">
         <div class="wheel-date-picker-pop">
           <div class="wheel-date-picker-nav" @selectstart.prevent>
@@ -27,7 +27,7 @@
                     </select>月
                   </div>
                   <div :class="c('returnToDayMode')">
-                    <g-button size="small" @click="mode='day'">确认</g-button>
+
                   </div>
                 </div>
               </template>
@@ -56,6 +56,7 @@
           <div class="wheel-date-picker-actions">
             <g-button size="small" @click="onClickToday">今天</g-button>
             <g-button size="small" @click="onClickClear">清除</g-button>
+            <g-button size="small" @click="mode = 'days'">确认</g-button>
           </div>
         </div>
       </template>
@@ -109,7 +110,7 @@ export default {
   },
   methods: {
     onOpen() {
-      this.mode = 'day'
+      this.mode = 'days'
     },
     isCurrentMonth(date) {
       let [year1, month1] = helper.getYearMonthDate(date)
@@ -201,15 +202,26 @@ export default {
     onClickClear() {
       this.$emit('input', undefined)
       this.$refs.popover.close()
-    }
+    },
+    onInput(value) {
+      let regex = /^\d{4}-\d{2}-\d{2}$/g;
+      if (value.match(regex)) {
+        let [year, month, day] = value.split("-");
+        month = month - 1;
+        year = year - 0;
+        this.display = {year, month};
+        this.$emit("input", new Date(year, month, day));
+      }
+    },
+    onChange() {
+      this.$refs.input.setRawValue(this.formattedValue);
+    },
   },
   computed: {
     visibleDays() {
       let date = new Date(this.display.year, this.display.month, 1)
       let first = helper.firstDayOfMonth(date)
-      let last = helper.lastDayOfMonth(date)
       let array = []
-      let [year, month, day] = helper.getYearMonthDate(date)
       let n = first.getDay()
       let x = first - (n === 0 ? 6 : n - 1) * 3600 * 24 * 1000
       for (let i = 0; i < 42; i++) {

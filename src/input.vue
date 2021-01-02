@@ -1,6 +1,8 @@
 <template>
     <div :class="{error}" class="wheel-toast">
-        <input :disabled="disabled" :readonly="readonly" :value="value" @blur="$emit('blur', $event.target.value)"
+        <input ref="input" :disabled="disabled" :readonly="readonly"
+               :value="value"
+               @blur="$emit('blur', $event.target.value)"
                @change="$emit('change', $event.target.value)"
                @focus="$emit('focus', $event.target.value)"
                @input="$emit('input', $event.target.value)"
@@ -35,6 +37,11 @@
       },
       error: {
         type: String
+      }
+    },
+    methods:{
+      setRawValue(value){
+        this.$refs.input.value = value
       }
     }
   }
