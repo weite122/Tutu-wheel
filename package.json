@@ -11,7 +11,8 @@
     "docs:build": "vuepress build docs"
   },
   "dependencies": {
-    "vue": "2.6.10"
+    "vue": "2.6.10",
+    "vue-server-renderer": "2.6.10"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.0",

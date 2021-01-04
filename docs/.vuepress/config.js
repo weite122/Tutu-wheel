@@ -32,6 +32,10 @@ module.exports = {
           '/components/pager',
           '/components/cascader',
           '/components/nav',
+          '/components/datepicker',
+          '/components/sticky',
+          '/components/scroll',
+          // '/components/table',
 
         ]
       }

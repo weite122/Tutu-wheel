@@ -132,13 +132,14 @@ export default {
     }
   },
   mounted() {
+    let scrollBarWidth = this.getScrollBarWidth()
     this.columns = this.$slots.default.map(node => {
-      let {text, field, width} = node.componentOptions.propsData
+      let {text, field, width} =  node.componentOptions.propsData
       let render = node.data.scopedSlots && node.data.scopedSlots.default
       return {text, field, width, render}
     })
-    let result = this.columns[0].render({value: '维特'})
-    console.log(result)
+    // let result = this.columns[0].render({value: '维特'})
+    // console.log(result)
 
     let table2 = this.$refs.table.cloneNode(false)
     this.table2 = table2
@@ -167,13 +168,12 @@ export default {
       this.$refs.actions.map(div => {
         div.parentNode.style.width = width2
       })
-
+      thead.children[0].children[1].style.width = parseInt(width2) + scrollBarWidth + 'px'
     }
 
   },
   beforeDestroy() {
     this.table2.remove()
-    window.removeEventListener('resize', this.onWindowResize)
   },
   watch: {
     selectedItems() {
@@ -208,6 +208,22 @@ export default {
     }
   },
   methods: {
+    getScrollBarWidth() {
+      let el = document.createElement("p"),
+          styles = {
+            width: "100px",
+            height: "100px",
+            overflowY: "scroll"
+          },
+          i;
+      for (i in styles) {
+        el.style[i] = styles[i];
+      }
+      document.body.appendChild(el);
+      let scrollBarWidth = el.offsetWidth - el.clientWidth;
+      el.remove();
+      return scrollBarWidth;
+    },
     inExpandedIds(id) {
       return this.expandIds.indexOf(id) >= 0
     },

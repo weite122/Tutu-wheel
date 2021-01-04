@@ -1,41 +1,40 @@
 <template>
   <div>
-    <div style="margin: 20px;">
-      <g-table :data-source="dataSource" bordered :selected-items.sync="selected" :order-by.sync="orderBy"
-               @update:orderBy="x" :loading="loading" :height="400" expend-field="description" checkable>
-        <g-table-column text="姓名" field="name" :width="200">
-          <template slot-scope="props">
-            <a :href="`/users/${props.value}`">{{props.value}}</a>
-          </template>
-        </g-table-column>
-        <g-table-column text="分数" field="score"></g-table-column>
+    <div style="padding: 20px;">
+      <g-table :columns="columns" :data-source="dataSource" bordered :selected-items.sync="selected"
+               :order-by.sync="orderBy"
+               @update:orderBy="x"
+               :loading="loading"
+               :height="400"
+               expand-field="description"
+               checkable
+      >
         <template slot-scope="xxx">
           <g-button size="small" @click="edit(xxx.item)">编辑</g-button>
           <g-button size="small" @click="view(xxx.item)">查看</g-button>
         </template>
       </g-table>
     </div>
+
   </div>
 </template>
 <script>
-import GTable from './table/table'
-import GTableColumn from './table/table-column'
-import GButton from './button/button'
+import GTable from '../../../src/table/table'
+import GButton from '../../../src/button/button'
 export default {
   name: "demo",
   components: {
     GTable,
-    GTableColumn,
     GButton
   },
   data() {
     return {
       selected: [],
       loading: false,
-      // columns: [
-      //   {text: '姓名', field: 'name', width: 100},
-      //   {text: '分数', field: 'score'},
-      // ],
+      columns: [
+        {text: '姓名', field: 'name', width: 100},
+        {text: '分数', field: 'score'},
+      ],
       orderBy: {
         name: 'asc',
         score: 'desc'
@@ -84,17 +83,10 @@ export default {
 <style>
 * {margin: 0; padding: 0; box-sizing: border-box;}
 img {max-width: 100%;}
-button:nth-child(1) {
-  margin-right: 5px;
-}
 html {
   --font-size: 14px;
 }
 body {
   font-size: var(--font-size);
-}
-a{
-  text-decoration: none;
-  color:#3eaf7c;
 }
 </style>

@@ -33,10 +33,7 @@ export default {
     },
     size: {
       type: String,
-      default: 'middle',
-      validator(value) {
-        return ['small', 'medium', 'mini'].indexOf(value) >= 0
-      }
+      default: 'middle'
     }
   }
 }

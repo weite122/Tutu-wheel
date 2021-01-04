@@ -143,7 +143,7 @@ export default {
   transition: transform 0.05s ease;
   &-wrapper {
     overflow: hidden;
-    border: 1px solid #2a8a5e;
+    border: 1px solid #aaa;
     position: relative;
   }
   &-track {
